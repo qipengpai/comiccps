@@ -71,4 +71,17 @@ public class AdminServiceImpl {
     public List<Admin> getAllCpsAdmin() {
         return adminMapper.getAllCpsAdmin();
     }
+
+
+    /**
+     *    解除绑定前验证密码
+     *
+     * @author pengpai
+     * @date 2018/4/23 19:47
+     * @param userType, password
+     * @return com.qpp.comiccps.basics.entity.Admin
+     */
+    public Admin checkUser(String userType, String password) {
+        return adminMapper.getAdminByCheckUser(userType,MD5.getMd5(password));
+    }
 }

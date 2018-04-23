@@ -482,4 +482,13 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--解除绑定-->
+  <update id="updateDistributorNull" parameterType="java.lang.String">
+    update distributor
+    <set>
+      userType = #{NULL,jdbcType=VARCHAR},
+    </set>
+    where id = #{id,jdbcType=VARCHAR}s
+  </update>
 </mapper>

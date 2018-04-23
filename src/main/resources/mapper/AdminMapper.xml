@@ -210,4 +210,14 @@
        <include refid="Custom_Column_List"/>
        FROM Admin
     </select>
+
+    <!--解除绑定前验证密码-->
+    <select id="getAdminByCheckUser" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Custom_Column_List"/>
+        FROM Admin
+        WHERE username=#{username,jdbcType=VARCHAR}
+        AND password = #{password,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

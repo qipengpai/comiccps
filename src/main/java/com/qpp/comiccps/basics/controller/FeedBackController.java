@@ -2,7 +2,6 @@ package com.qpp.comiccps.basics.controller;
 
 import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.FeedBack;
-import com.qpp.comiccps.basics.entity.UserEntity;
 import com.qpp.comiccps.basics.service.impl.FeedBackServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
 import com.qpp.comiccps.tool.Model;

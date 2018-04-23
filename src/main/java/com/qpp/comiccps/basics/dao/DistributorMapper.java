@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.data.DistributorData;
 import com.qpp.comiccps.tool.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -26,6 +27,9 @@ public interface DistributorMapper {
     // 增加分销商并绑定CPS
     int addDistributor(DistributorData distributorData);
 
-    //修改分销商或 修改绑定CPS
+    // 修改分销商或 修改绑定CPS
     int updateDistributor(DistributorData distributorData);
+
+    // 解除绑定
+    int updateDistributorNull(@Param("id") String id);
 }

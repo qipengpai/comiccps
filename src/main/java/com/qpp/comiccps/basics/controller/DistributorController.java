@@ -1,8 +1,10 @@
 package com.qpp.comiccps.basics.controller;
 
 import com.github.pagehelper.Page;
+import com.qpp.comiccps.basics.entity.Admin;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.data.DistributorData;
+import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
 import com.qpp.comiccps.basics.service.impl.DistributorServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
 import com.qpp.comiccps.tool.Model;
@@ -23,6 +25,8 @@ public class DistributorController {
 
     @Autowired
     private DistributorServiceImpl distributorService;
+    @Autowired
+    private AdminServiceImpl adminService;
 
 
     /**
@@ -150,6 +154,41 @@ public class DistributorController {
         if (distributor == null)
             return new Model(500, "查詢失敗");
         return new Model(distributor);
+    }
+
+    /**
+     *    解除绑定Cps用户与分销商
+     *
+     * @author pengpai
+     * @date 2018/4/23 19:52
+     * @param id, password, userType
+     * @return com.qpp.comiccps.tool.Model
+     */
+    @ApiOperation("解除绑定Cps用户与分销商")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", dataType = "String", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "userType", value = "adminId", dataType = "String", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", required = true, paramType = "query"),
+    })
+    @PostMapping(value = ActionUrl.BINDING_CPS_DISTRIBUTOR)
+    @RequiresAuthentication
+    @RequiresPermissions("distributor:unbind")
+    public Model unbindDistributor(@RequestParam("id") String id,
+                                   @RequestParam("password") String password,
+                                   @RequestParam("userType") String userType)
+            throws Exception {
+        if (!ParaClick.clickString(id))
+            return new Model(500, "ID为空");
+        if (!ParaClick.clickString(password))
+            return new Model(500, "密码为空");
+        Admin admin =adminService.checkUser(userType,password);
+        if (admin == null)
+            return new Model(500, "密码错误");
+        //  根据id查询分销商
+        int index = distributorService.updateDistributorNull(id);
+        if (index<1)
+            return new Model(500, "解除绑定失敗");
+        return new Model(200, "解除绑定成功");
     }
 
 }

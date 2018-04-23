@@ -75,4 +75,16 @@ public class DistributorServiceImpl {
     public Distributor getDistributorById(String id) {
         return distributorMapper.selectByPrimaryKey(id);
     }
+
+    /**
+     *    解除绑定
+     *
+     * @author pengpai
+     * @date 2018/4/23 19:40
+     * @param id
+     * @return int
+     */
+    public int updateDistributorNull(String id) {
+        return distributorMapper.updateDistributorNull(id);
+    }
 }

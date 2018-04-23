@@ -6,8 +6,6 @@ public class ActionUrl {
     public static final String CPS_ADMIN_LOGIN="/crxl/qpp/comicCps/cpsAdminLogin";
     // 创建Cps用户
     public static final String CPS_CREATE_ADMIN="/crxl/qpp/comicCps/createCpsAdmin";
-    // 绑定(解除绑定)Cps用户与分销商
-    public static final String BINDING_CPS_DISTRIBUTOR="/crxl/qpp/comicCps/bindingCpsAndDistributor";
     // 查询所有Cps用户
     public static final String GET_ALL_CPS_ADMIN="/crxl/qpp/comicCps/getAllCpsAdmin";
 
@@ -30,7 +28,8 @@ public class ActionUrl {
     public static final String ADMIN_UPDATE_DISTRIBUTOR="/crxl/qpp/comicCps/admin/updateDistributor";
     // 根据id查询分销商
     public static final String ADMIN_GET_DISTRIBUTOR_BYID="/crxl/qpp/comicCps/admin/getDistributorId";
-
+    // 解除绑定Cps用户与分销商
+    public static final String BINDING_CPS_DISTRIBUTOR="/crxl/qpp/comicCps/admin/bindingCpsAndDistributor";
 
 
 

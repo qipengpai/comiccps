@@ -33,4 +33,7 @@ public interface AdminMapper {
 
     // 查询所有CPS用户
     List<Admin> getAllCpsAdmin();
+
+    // 解除绑定前验证密码
+    Admin getAdminByCheckUser(@Param("userType")String userType,@Param("password")String password);
 }
