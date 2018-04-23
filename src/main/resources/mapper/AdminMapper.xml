@@ -216,7 +216,7 @@
         SELECT
         <include refid="Custom_Column_List"/>
         FROM Admin
-        WHERE username=#{username,jdbcType=VARCHAR}
+        WHERE id=#{userType,jdbcType=VARCHAR}
         AND password = #{password,jdbcType=VARCHAR}
     </select>
 

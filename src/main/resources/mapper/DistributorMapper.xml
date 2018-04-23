@@ -287,7 +287,7 @@
   </select>
 
   <!--增加分销商并绑定CPS-->
-  <insert id="addDistributor" parameterType="com.qpp.comiccps.basics.entity.data.DistributorDataS">
+  <insert id="addDistributor" parameterType="com.qpp.comiccps.basics.entity.data.DistributorData">
     <selectKey keyProperty="id" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
