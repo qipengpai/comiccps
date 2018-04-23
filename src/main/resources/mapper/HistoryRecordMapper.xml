@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.HistoryRecordMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.HistoryRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="cartoonSetId" jdbcType="VARCHAR" property="cartoonsetid" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="watchState" jdbcType="INTEGER" property="watchstate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonId, cartoonSetId, implDate, userId, watchState
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from historyrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from historyrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.HistoryRecord">
+    insert into historyrecord (id, cartoonId, cartoonSetId, 
+      implDate, userId, watchState
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, #{cartoonsetid,jdbcType=VARCHAR}, 
+      #{impldate,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{watchstate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.HistoryRecord">
+    insert into historyrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="watchstate != null">
+        watchState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="watchstate != null">
+        #{watchstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.HistoryRecord">
+    update historyrecord
+    <set>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="watchstate != null">
+        watchState = #{watchstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.HistoryRecord">
+    update historyrecord
+    set cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      watchState = #{watchstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

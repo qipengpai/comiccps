@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.FriendsCircleMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.FriendsCircle">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="aite" jdbcType="VARCHAR" property="aite" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentcount" />
+    <result column="deleteState" jdbcType="INTEGER" property="deletestate" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="okCount" jdbcType="INTEGER" property="okcount" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="releaseDate" jdbcType="VARCHAR" property="releasedate" />
+    <result column="releaseInfo" jdbcType="VARCHAR" property="releaseinfo" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, aite, commentCount, deleteState, implDate, okCount, photo, releaseDate, releaseInfo, 
+    state, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from friendscircle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from friendscircle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.FriendsCircle">
+    insert into friendscircle (id, aite, commentCount, 
+      deleteState, implDate, okCount, 
+      photo, releaseDate, releaseInfo, 
+      state, userId)
+    values (#{id,jdbcType=VARCHAR}, #{aite,jdbcType=VARCHAR}, #{commentcount,jdbcType=INTEGER}, 
+      #{deletestate,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, #{okcount,jdbcType=INTEGER}, 
+      #{photo,jdbcType=VARCHAR}, #{releasedate,jdbcType=VARCHAR}, #{releaseinfo,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.FriendsCircle">
+    insert into friendscircle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="aite != null">
+        aite,
+      </if>
+      <if test="commentcount != null">
+        commentCount,
+      </if>
+      <if test="deletestate != null">
+        deleteState,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="okcount != null">
+        okCount,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="releasedate != null">
+        releaseDate,
+      </if>
+      <if test="releaseinfo != null">
+        releaseInfo,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="aite != null">
+        #{aite,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null">
+        #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="okcount != null">
+        #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null">
+        #{releasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseinfo != null">
+        #{releaseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.FriendsCircle">
+    update friendscircle
+    <set>
+      <if test="aite != null">
+        aite = #{aite,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null">
+        deleteState = #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="okcount != null">
+        okCount = #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null">
+        releaseDate = #{releasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseinfo != null">
+        releaseInfo = #{releaseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.FriendsCircle">
+    update friendscircle
+    set aite = #{aite,jdbcType=VARCHAR},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      deleteState = #{deletestate,jdbcType=INTEGER},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      okCount = #{okcount,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      releaseDate = #{releasedate,jdbcType=VARCHAR},
+      releaseInfo = #{releaseinfo,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

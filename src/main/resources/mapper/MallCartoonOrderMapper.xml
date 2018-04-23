@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.MallCartoonOrderMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.MallCartoonOrder">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="cartoonSetId" jdbcType="VARCHAR" property="cartoonsetid" />
+    <result column="orderDate" jdbcType="VARCHAR" property="orderdate" />
+    <result column="orderMoney" jdbcType="INTEGER" property="ordermoney" />
+    <result column="orderNum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="orderState" jdbcType="INTEGER" property="orderstate" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonId, cartoonSetId, orderDate, orderMoney, orderNum, orderState, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mallcartoonorder
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mallcartoonorder
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.MallCartoonOrder">
+    insert into mallcartoonorder (id, cartoonId, cartoonSetId, 
+      orderDate, orderMoney, orderNum, 
+      orderState, userId)
+    values (#{id,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, #{cartoonsetid,jdbcType=VARCHAR}, 
+      #{orderdate,jdbcType=VARCHAR}, #{ordermoney,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.MallCartoonOrder">
+    insert into mallcartoonorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId,
+      </if>
+      <if test="orderdate != null">
+        orderDate,
+      </if>
+      <if test="ordermoney != null">
+        orderMoney,
+      </if>
+      <if test="ordernum != null">
+        orderNum,
+      </if>
+      <if test="orderstate != null">
+        orderState,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        #{ordermoney,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null">
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.MallCartoonOrder">
+    update mallcartoonorder
+    <set>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        orderDate = #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        orderMoney = #{ordermoney,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        orderNum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null">
+        orderState = #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.MallCartoonOrder">
+    update mallcartoonorder
+    set cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      orderDate = #{orderdate,jdbcType=VARCHAR},
+      orderMoney = #{ordermoney,jdbcType=INTEGER},
+      orderNum = #{ordernum,jdbcType=VARCHAR},
+      orderState = #{orderstate,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

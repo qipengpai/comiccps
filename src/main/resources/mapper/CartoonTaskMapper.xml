@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CartoonTaskMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.CartoonTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="taskAward" jdbcType="INTEGER" property="taskaward" />
+    <result column="taskInfo" jdbcType="VARCHAR" property="taskinfo" />
+    <result column="taskName" jdbcType="VARCHAR" property="taskname" />
+    <result column="taskType" jdbcType="INTEGER" property="tasktype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, implDate, sort, state, taskAward, taskInfo, taskName, taskType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartoontask
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cartoontask
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.CartoonTask">
+    insert into cartoontask (id, implDate, sort, 
+      state, taskAward, taskInfo, 
+      taskName, taskType)
+    values (#{id,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{taskaward,jdbcType=INTEGER}, #{taskinfo,jdbcType=VARCHAR}, 
+      #{taskname,jdbcType=VARCHAR}, #{tasktype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.CartoonTask">
+    insert into cartoontask
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="taskaward != null">
+        taskAward,
+      </if>
+      <if test="taskinfo != null">
+        taskInfo,
+      </if>
+      <if test="taskname != null">
+        taskName,
+      </if>
+      <if test="tasktype != null">
+        taskType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="taskaward != null">
+        #{taskaward,jdbcType=INTEGER},
+      </if>
+      <if test="taskinfo != null">
+        #{taskinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskname != null">
+        #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null">
+        #{tasktype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.CartoonTask">
+    update cartoontask
+    <set>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="taskaward != null">
+        taskAward = #{taskaward,jdbcType=INTEGER},
+      </if>
+      <if test="taskinfo != null">
+        taskInfo = #{taskinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="taskname != null">
+        taskName = #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null">
+        taskType = #{tasktype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.CartoonTask">
+    update cartoontask
+    set implDate = #{impldate,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      taskAward = #{taskaward,jdbcType=INTEGER},
+      taskInfo = #{taskinfo,jdbcType=VARCHAR},
+      taskName = #{taskname,jdbcType=VARCHAR},
+      taskType = #{tasktype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

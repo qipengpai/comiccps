@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CartoonCommentMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.CartoonComment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="aite" jdbcType="VARCHAR" property="aite" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentcount" />
+    <result column="commentDate" jdbcType="VARCHAR" property="commentdate" />
+    <result column="commentId" jdbcType="VARCHAR" property="commentid" />
+    <result column="commentInfo" jdbcType="VARCHAR" property="commentinfo" />
+    <result column="deleteCartoonComment" jdbcType="INTEGER" property="deletecartooncomment" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="okCount" jdbcType="INTEGER" property="okcount" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, aite, cartoonId, commentCount, commentDate, commentId, commentInfo, deleteCartoonComment, 
+    implDate, okCount, sort, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartooncomment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cartooncomment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.CartoonComment">
+    insert into cartooncomment (id, aite, cartoonId, 
+      commentCount, commentDate, commentId, 
+      commentInfo, deleteCartoonComment, implDate, 
+      okCount, sort, userId
+      )
+    values (#{id,jdbcType=VARCHAR}, #{aite,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, 
+      #{commentcount,jdbcType=INTEGER}, #{commentdate,jdbcType=VARCHAR}, #{commentid,jdbcType=VARCHAR}, 
+      #{commentinfo,jdbcType=VARCHAR}, #{deletecartooncomment,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, 
+      #{okcount,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.CartoonComment">
+    insert into cartooncomment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="aite != null">
+        aite,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="commentcount != null">
+        commentCount,
+      </if>
+      <if test="commentdate != null">
+        commentDate,
+      </if>
+      <if test="commentid != null">
+        commentId,
+      </if>
+      <if test="commentinfo != null">
+        commentInfo,
+      </if>
+      <if test="deletecartooncomment != null">
+        deleteCartoonComment,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="okcount != null">
+        okCount,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="aite != null">
+        #{aite,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="commentdate != null">
+        #{commentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentinfo != null">
+        #{commentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="deletecartooncomment != null">
+        #{deletecartooncomment,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="okcount != null">
+        #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.CartoonComment">
+    update cartooncomment
+    <set>
+      <if test="aite != null">
+        aite = #{aite,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="commentdate != null">
+        commentDate = #{commentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="commentid != null">
+        commentId = #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentinfo != null">
+        commentInfo = #{commentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="deletecartooncomment != null">
+        deleteCartoonComment = #{deletecartooncomment,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="okcount != null">
+        okCount = #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.CartoonComment">
+    update cartooncomment
+    set aite = #{aite,jdbcType=VARCHAR},
+      cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      commentDate = #{commentdate,jdbcType=VARCHAR},
+      commentId = #{commentid,jdbcType=VARCHAR},
+      commentInfo = #{commentinfo,jdbcType=VARCHAR},
+      deleteCartoonComment = #{deletecartooncomment,jdbcType=INTEGER},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      okCount = #{okcount,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

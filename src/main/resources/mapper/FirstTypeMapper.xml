@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.FirstTypeMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.FirstType">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="firstType" jdbcType="VARCHAR" property="firsttype" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, firstType, implDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from firsttype
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from firsttype
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.FirstType">
+    insert into firsttype (id, firstType, implDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{firsttype,jdbcType=VARCHAR}, #{impldate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.FirstType">
+    insert into firsttype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="firsttype != null">
+        firstType,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="firsttype != null">
+        #{firsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.FirstType">
+    update firsttype
+    <set>
+      <if test="firsttype != null">
+        firstType = #{firsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.FirstType">
+    update firsttype
+    set firstType = #{firsttype,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

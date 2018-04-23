@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.BarrageMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.Barrage">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="cartoonPhotoId" jdbcType="VARCHAR" property="cartoonphotoid" />
+    <result column="cartoonSetId" jdbcType="VARCHAR" property="cartoonsetid" />
+    <result column="contentDate" jdbcType="VARCHAR" property="contentdate" />
+    <result column="contentInfo" jdbcType="VARCHAR" property="contentinfo" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonId, cartoonPhotoId, cartoonSetId, contentDate, contentInfo, implDate, 
+    state, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from barrage
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from barrage
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.Barrage">
+    insert into barrage (id, cartoonId, cartoonPhotoId, 
+      cartoonSetId, contentDate, contentInfo, 
+      implDate, state, userId
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, #{cartoonphotoid,jdbcType=VARCHAR}, 
+      #{cartoonsetid,jdbcType=VARCHAR}, #{contentdate,jdbcType=VARCHAR}, #{contentinfo,jdbcType=VARCHAR}, 
+      #{impldate,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.Barrage">
+    insert into barrage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="cartoonphotoid != null">
+        cartoonPhotoId,
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId,
+      </if>
+      <if test="contentdate != null">
+        contentDate,
+      </if>
+      <if test="contentinfo != null">
+        contentInfo,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonphotoid != null">
+        #{cartoonphotoid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="contentdate != null">
+        #{contentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="contentinfo != null">
+        #{contentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.Barrage">
+    update barrage
+    <set>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonphotoid != null">
+        cartoonPhotoId = #{cartoonphotoid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="contentdate != null">
+        contentDate = #{contentdate,jdbcType=VARCHAR},
+      </if>
+      <if test="contentinfo != null">
+        contentInfo = #{contentinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.Barrage">
+    update barrage
+    set cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      cartoonPhotoId = #{cartoonphotoid,jdbcType=VARCHAR},
+      cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      contentDate = #{contentdate,jdbcType=VARCHAR},
+      contentInfo = #{contentinfo,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.DistributorNewsMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DistributorNews">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ReleaseDate" jdbcType="VARCHAR" property="releasedate" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ReleaseDate, content, implDate, title, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from distributornews
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from distributornews
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DistributorNews">
+    insert into distributornews (id, ReleaseDate, content, 
+      implDate, title, state
+      )
+    values (#{id,jdbcType=VARCHAR}, #{releasedate,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{impldate,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DistributorNews">
+    insert into distributornews
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="releasedate != null">
+        ReleaseDate,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="releasedate != null">
+        #{releasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DistributorNews">
+    update distributornews
+    <set>
+      <if test="releasedate != null">
+        ReleaseDate = #{releasedate,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DistributorNews">
+    update distributornews
+    set ReleaseDate = #{releasedate,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

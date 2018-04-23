@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.DistributorWithdrawalsMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="distridutionId" jdbcType="VARCHAR" property="distridutionid" />
+    <result column="impldate" jdbcType="VARCHAR" property="impldate" />
+    <result column="proportion" jdbcType="DOUBLE" property="proportion" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="withdrawalsDate" jdbcType="VARCHAR" property="withdrawalsdate" />
+    <result column="withdrawalsMoney" jdbcType="DOUBLE" property="withdrawalsmoney" />
+    <result column="withdrawalsState" jdbcType="INTEGER" property="withdrawalsstate" />
+    <result column="orderSum" jdbcType="INTEGER" property="ordersum" />
+    <result column="todayRecharge" jdbcType="DOUBLE" property="todayrecharge" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distridutionId, impldate, proportion, remarks, withdrawalsDate, withdrawalsMoney, 
+    withdrawalsState, orderSum, todayRecharge
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from distributorwithdrawals
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from distributorwithdrawals
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    insert into distributorwithdrawals (id, distridutionId, impldate, 
+      proportion, remarks, withdrawalsDate, 
+      withdrawalsMoney, withdrawalsState, orderSum, 
+      todayRecharge)
+    values (#{id,jdbcType=VARCHAR}, #{distridutionid,jdbcType=VARCHAR}, #{impldate,jdbcType=VARCHAR}, 
+      #{proportion,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, #{withdrawalsdate,jdbcType=VARCHAR}, 
+      #{withdrawalsmoney,jdbcType=DOUBLE}, #{withdrawalsstate,jdbcType=INTEGER}, #{ordersum,jdbcType=INTEGER}, 
+      #{todayrecharge,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    insert into distributorwithdrawals
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distridutionid != null">
+        distridutionId,
+      </if>
+      <if test="impldate != null">
+        impldate,
+      </if>
+      <if test="proportion != null">
+        proportion,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="withdrawalsdate != null">
+        withdrawalsDate,
+      </if>
+      <if test="withdrawalsmoney != null">
+        withdrawalsMoney,
+      </if>
+      <if test="withdrawalsstate != null">
+        withdrawalsState,
+      </if>
+      <if test="ordersum != null">
+        orderSum,
+      </if>
+      <if test="todayrecharge != null">
+        todayRecharge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="distridutionid != null">
+        #{distridutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null">
+        #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalsdate != null">
+        #{withdrawalsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalsmoney != null">
+        #{withdrawalsmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrawalsstate != null">
+        #{withdrawalsstate,jdbcType=INTEGER},
+      </if>
+      <if test="ordersum != null">
+        #{ordersum,jdbcType=INTEGER},
+      </if>
+      <if test="todayrecharge != null">
+        #{todayrecharge,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    update distributorwithdrawals
+    <set>
+      <if test="distridutionid != null">
+        distridutionId = #{distridutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        impldate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null">
+        proportion = #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalsdate != null">
+        withdrawalsDate = #{withdrawalsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawalsmoney != null">
+        withdrawalsMoney = #{withdrawalsmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrawalsstate != null">
+        withdrawalsState = #{withdrawalsstate,jdbcType=INTEGER},
+      </if>
+      <if test="ordersum != null">
+        orderSum = #{ordersum,jdbcType=INTEGER},
+      </if>
+      <if test="todayrecharge != null">
+        todayRecharge = #{todayrecharge,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    update distributorwithdrawals
+    set distridutionId = #{distridutionid,jdbcType=VARCHAR},
+      impldate = #{impldate,jdbcType=VARCHAR},
+      proportion = #{proportion,jdbcType=DOUBLE},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      withdrawalsDate = #{withdrawalsdate,jdbcType=VARCHAR},
+      withdrawalsMoney = #{withdrawalsmoney,jdbcType=DOUBLE},
+      withdrawalsState = #{withdrawalsstate,jdbcType=INTEGER},
+      orderSum = #{ordersum,jdbcType=INTEGER},
+      todayRecharge = #{todayrecharge,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

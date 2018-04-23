@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CommentVeryOkMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.CommentVeryOk">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="commentId" jdbcType="VARCHAR" property="commentid" />
+    <result column="okDate" jdbcType="VARCHAR" property="okdate" />
+    <result column="okState" jdbcType="INTEGER" property="okstate" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, commentId, okDate, okState, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commentveryok
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from commentveryok
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.CommentVeryOk">
+    insert into commentveryok (id, commentId, okDate, 
+      okState, userId)
+    values (#{id,jdbcType=VARCHAR}, #{commentid,jdbcType=VARCHAR}, #{okdate,jdbcType=VARCHAR}, 
+      #{okstate,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.CommentVeryOk">
+    insert into commentveryok
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commentid != null">
+        commentId,
+      </if>
+      <if test="okdate != null">
+        okDate,
+      </if>
+      <if test="okstate != null">
+        okState,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="okdate != null">
+        #{okdate,jdbcType=VARCHAR},
+      </if>
+      <if test="okstate != null">
+        #{okstate,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.CommentVeryOk">
+    update commentveryok
+    <set>
+      <if test="commentid != null">
+        commentId = #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="okdate != null">
+        okDate = #{okdate,jdbcType=VARCHAR},
+      </if>
+      <if test="okstate != null">
+        okState = #{okstate,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.CommentVeryOk">
+    update commentveryok
+    set commentId = #{commentid,jdbcType=VARCHAR},
+      okDate = #{okdate,jdbcType=VARCHAR},
+      okState = #{okstate,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

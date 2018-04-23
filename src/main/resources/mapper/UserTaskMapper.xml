@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.UserTaskMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.UserTask">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="buttonState" jdbcType="INTEGER" property="buttonstate" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="taskId" jdbcType="INTEGER" property="taskid" />
+    <result column="taskState" jdbcType="INTEGER" property="taskstate" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, buttonState, implDate, sort, taskId, taskState, type, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usertask
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from usertask
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.UserTask">
+    insert into usertask (id, buttonState, implDate, 
+      sort, taskId, taskState, 
+      type, userId)
+    values (#{id,jdbcType=VARCHAR}, #{buttonstate,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{taskid,jdbcType=INTEGER}, #{taskstate,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.UserTask">
+    insert into usertask
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="buttonstate != null">
+        buttonState,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="taskid != null">
+        taskId,
+      </if>
+      <if test="taskstate != null">
+        taskState,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonstate != null">
+        #{buttonstate,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null">
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="taskstate != null">
+        #{taskstate,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.UserTask">
+    update usertask
+    <set>
+      <if test="buttonstate != null">
+        buttonState = #{buttonstate,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null">
+        taskId = #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="taskstate != null">
+        taskState = #{taskstate,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.UserTask">
+    update usertask
+    set buttonState = #{buttonstate,jdbcType=INTEGER},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      taskState = #{taskstate,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

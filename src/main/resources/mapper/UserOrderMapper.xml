@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.UserOrderMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.UserOrder">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="orderCurrency" jdbcType="INTEGER" property="ordercurrency" />
+    <result column="orderDate" jdbcType="VARCHAR" property="orderdate" />
+    <result column="orderDescription" jdbcType="VARCHAR" property="orderdescription" />
+    <result column="orderImplDate" jdbcType="VARCHAR" property="orderimpldate" />
+    <result column="orderIntegral" jdbcType="VARCHAR" property="orderintegral" />
+    <result column="orderMoney" jdbcType="INTEGER" property="ordermoney" />
+    <result column="orderNum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="orderRemarks" jdbcType="VARCHAR" property="orderremarks" />
+    <result column="orderState" jdbcType="INTEGER" property="orderstate" />
+    <result column="orderUserId" jdbcType="VARCHAR" property="orderuserid" />
+    <result column="mchCreateIp" jdbcType="VARCHAR" property="mchcreateip" />
+    <result column="orderUserName" jdbcType="VARCHAR" property="orderusername" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderCurrency, orderDate, orderDescription, orderImplDate, orderIntegral, orderMoney, 
+    orderNum, orderRemarks, orderState, orderUserId, mchCreateIp, orderUserName
+  </sql>
+  <sql id="Custom_Column_List">
+    id, orderDescription, orderImplDate, orderIntegral, orderMoney,
+    orderNum, orderRemarks, orderUserId, orderUserName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userorder
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userorder
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.UserOrder">
+    insert into userorder (id, orderCurrency, orderDate, 
+      orderDescription, orderImplDate, orderIntegral, 
+      orderMoney, orderNum, orderRemarks, 
+      orderState, orderUserId, mchCreateIp, 
+      orderUserName)
+    values (#{id,jdbcType=VARCHAR}, #{ordercurrency,jdbcType=INTEGER}, #{orderdate,jdbcType=VARCHAR}, 
+      #{orderdescription,jdbcType=VARCHAR}, #{orderimpldate,jdbcType=VARCHAR}, #{orderintegral,jdbcType=VARCHAR}, 
+      #{ordermoney,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, #{orderremarks,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{orderuserid,jdbcType=VARCHAR}, #{mchcreateip,jdbcType=VARCHAR}, 
+      #{orderusername,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.UserOrder">
+    insert into userorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ordercurrency != null">
+        orderCurrency,
+      </if>
+      <if test="orderdate != null">
+        orderDate,
+      </if>
+      <if test="orderdescription != null">
+        orderDescription,
+      </if>
+      <if test="orderimpldate != null">
+        orderImplDate,
+      </if>
+      <if test="orderintegral != null">
+        orderIntegral,
+      </if>
+      <if test="ordermoney != null">
+        orderMoney,
+      </if>
+      <if test="ordernum != null">
+        orderNum,
+      </if>
+      <if test="orderremarks != null">
+        orderRemarks,
+      </if>
+      <if test="orderstate != null">
+        orderState,
+      </if>
+      <if test="orderuserid != null">
+        orderUserId,
+      </if>
+      <if test="mchcreateip != null">
+        mchCreateIp,
+      </if>
+      <if test="orderusername != null">
+        orderUserName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercurrency != null">
+        #{ordercurrency,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdescription != null">
+        #{orderdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="orderimpldate != null">
+        #{orderimpldate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderintegral != null">
+        #{orderintegral,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        #{ordermoney,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderremarks != null">
+        #{orderremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null">
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="orderuserid != null">
+        #{orderuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchcreateip != null">
+        #{mchcreateip,jdbcType=VARCHAR},
+      </if>
+      <if test="orderusername != null">
+        #{orderusername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.UserOrder">
+    update userorder
+    <set>
+      <if test="ordercurrency != null">
+        orderCurrency = #{ordercurrency,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        orderDate = #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdescription != null">
+        orderDescription = #{orderdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="orderimpldate != null">
+        orderImplDate = #{orderimpldate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderintegral != null">
+        orderIntegral = #{orderintegral,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        orderMoney = #{ordermoney,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        orderNum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderremarks != null">
+        orderRemarks = #{orderremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderstate != null">
+        orderState = #{orderstate,jdbcType=INTEGER},
+      </if>
+      <if test="orderuserid != null">
+        orderUserId = #{orderuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="mchcreateip != null">
+        mchCreateIp = #{mchcreateip,jdbcType=VARCHAR},
+      </if>
+      <if test="orderusername != null">
+        orderUserName = #{orderusername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.UserOrder">
+    update userorder
+    set orderCurrency = #{ordercurrency,jdbcType=INTEGER},
+      orderDate = #{orderdate,jdbcType=VARCHAR},
+      orderDescription = #{orderdescription,jdbcType=VARCHAR},
+      orderImplDate = #{orderimpldate,jdbcType=VARCHAR},
+      orderIntegral = #{orderintegral,jdbcType=VARCHAR},
+      orderMoney = #{ordermoney,jdbcType=INTEGER},
+      orderNum = #{ordernum,jdbcType=VARCHAR},
+      orderRemarks = #{orderremarks,jdbcType=VARCHAR},
+      orderState = #{orderstate,jdbcType=INTEGER},
+      orderUserId = #{orderuserid,jdbcType=VARCHAR},
+      mchCreateIp = #{mchcreateip,jdbcType=VARCHAR},
+      orderUserName = #{orderusername,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--（条件）分页查询用户订单列表-->
+  <select id="getAllUserOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Custom_Column_List"/>
+    FROM UserOrder WHERE orderState=1
+    <if test="condition != null">
+      AND ((orderNum LIKE CONCAT('%',#{condition},'%'))
+      OR (orderDescription LIKE CONCAT('%',#{condition},'%'))
+      OR (orderUserId LIKE CONCAT('%',#{condition},'%'))
+      OR (orderIntegral LIKE LIKE CONCAT('%',#{condition},'%'))
+      OR (orderUserName LIKE LIKE CONCAT('%',#{condition},'%')))
+    </if>
+    <if test="startDate != null">
+      AND orderImplDate BETWEEN startDate AND DATE_ADD(endDate,INTERVAL 1 DAY)
+    </if>
+    order by orderImplDate DESC
+  </select>
+</mapper>

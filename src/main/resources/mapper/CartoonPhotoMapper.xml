@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CartoonPhotoMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.CartoonPhoto">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="cartoonSetId" jdbcType="VARCHAR" property="cartoonsetid" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="photoHeight" jdbcType="VARCHAR" property="photoheight" />
+    <result column="photoUrl" jdbcType="VARCHAR" property="photourl" />
+    <result column="photoWidth" jdbcType="VARCHAR" property="photowidth" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonId, cartoonSetId, implDate, photoHeight, photoUrl, photoWidth, sort
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartoonphoto
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cartoonphoto
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.CartoonPhoto">
+    insert into cartoonphoto (id, cartoonId, cartoonSetId, 
+      implDate, photoHeight, photoUrl, 
+      photoWidth, sort)
+    values (#{id,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, #{cartoonsetid,jdbcType=VARCHAR}, 
+      #{impldate,jdbcType=VARCHAR}, #{photoheight,jdbcType=VARCHAR}, #{photourl,jdbcType=VARCHAR}, 
+      #{photowidth,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.CartoonPhoto">
+    insert into cartoonphoto
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="photoheight != null">
+        photoHeight,
+      </if>
+      <if test="photourl != null">
+        photoUrl,
+      </if>
+      <if test="photowidth != null">
+        photoWidth,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="photoheight != null">
+        #{photoheight,jdbcType=VARCHAR},
+      </if>
+      <if test="photourl != null">
+        #{photourl,jdbcType=VARCHAR},
+      </if>
+      <if test="photowidth != null">
+        #{photowidth,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.CartoonPhoto">
+    update cartoonphoto
+    <set>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonsetid != null">
+        cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="photoheight != null">
+        photoHeight = #{photoheight,jdbcType=VARCHAR},
+      </if>
+      <if test="photourl != null">
+        photoUrl = #{photourl,jdbcType=VARCHAR},
+      </if>
+      <if test="photowidth != null">
+        photoWidth = #{photowidth,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.CartoonPhoto">
+    update cartoonphoto
+    set cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      cartoonSetId = #{cartoonsetid,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      photoHeight = #{photoheight,jdbcType=VARCHAR},
+      photoUrl = #{photourl,jdbcType=VARCHAR},
+      photoWidth = #{photowidth,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CartoonMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.Cartoon">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonAuthor" jdbcType="VARCHAR" property="cartoonauthor" />
+    <result column="cartoonAuthorPic" jdbcType="VARCHAR" property="cartoonauthorpic" />
+    <result column="cartoonName" jdbcType="VARCHAR" property="cartoonname" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentcount" />
+    <result column="firstType" jdbcType="VARCHAR" property="firsttype" />
+    <result column="followCount" jdbcType="INTEGER" property="followcount" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="introduc" jdbcType="VARCHAR" property="introduc" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="mainPhoto" jdbcType="VARCHAR" property="mainphoto" />
+    <result column="midelPhoto" jdbcType="VARCHAR" property="midelphoto" />
+    <result column="playCount" jdbcType="INTEGER" property="playcount" />
+    <result column="serialState" jdbcType="VARCHAR" property="serialstate" />
+    <result column="smallPhoto" jdbcType="VARCHAR" property="smallphoto" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="updateDate" jdbcType="VARCHAR" property="updatedate" />
+    <result column="updateTile" jdbcType="VARCHAR" property="updatetile" />
+    <result column="updateType" jdbcType="VARCHAR" property="updatetype" />
+    <result column="sharePhoto" jdbcType="VARCHAR" property="sharephoto" />
+    <result column="anroidState" jdbcType="INTEGER" property="anroidstate" />
+    <result column="distributorState" jdbcType="INTEGER" property="distributorstate" />
+    <result column="iosState" jdbcType="INTEGER" property="iosstate" />
+    <result column="recommendationIndex" jdbcType="INTEGER" property="recommendationindex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonAuthor, cartoonAuthorPic, cartoonName, commentCount, firstType, followCount, 
+    hot, implDate, introduc, introduction, mainPhoto, midelPhoto, playCount, serialState, 
+    smallPhoto, sort, state, updateDate, updateTile, updateType, sharePhoto, anroidState, 
+    distributorState, iosState, recommendationIndex
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartoon
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cartoon
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.Cartoon">
+    insert into cartoon (id, cartoonAuthor, cartoonAuthorPic, 
+      cartoonName, commentCount, firstType, 
+      followCount, hot, implDate, 
+      introduc, introduction, mainPhoto, 
+      midelPhoto, playCount, serialState, 
+      smallPhoto, sort, state, 
+      updateDate, updateTile, updateType, 
+      sharePhoto, anroidState, distributorState, 
+      iosState, recommendationIndex)
+    values (#{id,jdbcType=VARCHAR}, #{cartoonauthor,jdbcType=VARCHAR}, #{cartoonauthorpic,jdbcType=VARCHAR}, 
+      #{cartoonname,jdbcType=VARCHAR}, #{commentcount,jdbcType=INTEGER}, #{firsttype,jdbcType=VARCHAR}, 
+      #{followcount,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, 
+      #{introduc,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{mainphoto,jdbcType=VARCHAR}, 
+      #{midelphoto,jdbcType=VARCHAR}, #{playcount,jdbcType=INTEGER}, #{serialstate,jdbcType=VARCHAR}, 
+      #{smallphoto,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{updatedate,jdbcType=VARCHAR}, #{updatetile,jdbcType=VARCHAR}, #{updatetype,jdbcType=VARCHAR}, 
+      #{sharephoto,jdbcType=VARCHAR}, #{anroidstate,jdbcType=INTEGER}, #{distributorstate,jdbcType=INTEGER}, 
+      #{iosstate,jdbcType=INTEGER}, #{recommendationindex,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.Cartoon">
+    insert into cartoon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonauthor != null">
+        cartoonAuthor,
+      </if>
+      <if test="cartoonauthorpic != null">
+        cartoonAuthorPic,
+      </if>
+      <if test="cartoonname != null">
+        cartoonName,
+      </if>
+      <if test="commentcount != null">
+        commentCount,
+      </if>
+      <if test="firsttype != null">
+        firstType,
+      </if>
+      <if test="followcount != null">
+        followCount,
+      </if>
+      <if test="hot != null">
+        hot,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="introduc != null">
+        introduc,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="mainphoto != null">
+        mainPhoto,
+      </if>
+      <if test="midelphoto != null">
+        midelPhoto,
+      </if>
+      <if test="playcount != null">
+        playCount,
+      </if>
+      <if test="serialstate != null">
+        serialState,
+      </if>
+      <if test="smallphoto != null">
+        smallPhoto,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="updatedate != null">
+        updateDate,
+      </if>
+      <if test="updatetile != null">
+        updateTile,
+      </if>
+      <if test="updatetype != null">
+        updateType,
+      </if>
+      <if test="sharephoto != null">
+        sharePhoto,
+      </if>
+      <if test="anroidstate != null">
+        anroidState,
+      </if>
+      <if test="distributorstate != null">
+        distributorState,
+      </if>
+      <if test="iosstate != null">
+        iosState,
+      </if>
+      <if test="recommendationindex != null">
+        recommendationIndex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonauthor != null">
+        #{cartoonauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonauthorpic != null">
+        #{cartoonauthorpic,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonname != null">
+        #{cartoonname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="firsttype != null">
+        #{firsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="followcount != null">
+        #{followcount,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="introduc != null">
+        #{introduc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="mainphoto != null">
+        #{mainphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="midelphoto != null">
+        #{midelphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="playcount != null">
+        #{playcount,jdbcType=INTEGER},
+      </if>
+      <if test="serialstate != null">
+        #{serialstate,jdbcType=VARCHAR},
+      </if>
+      <if test="smallphoto != null">
+        #{smallphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetile != null">
+        #{updatetile,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetype != null">
+        #{updatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sharephoto != null">
+        #{sharephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="anroidstate != null">
+        #{anroidstate,jdbcType=INTEGER},
+      </if>
+      <if test="distributorstate != null">
+        #{distributorstate,jdbcType=INTEGER},
+      </if>
+      <if test="iosstate != null">
+        #{iosstate,jdbcType=INTEGER},
+      </if>
+      <if test="recommendationindex != null">
+        #{recommendationindex,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.Cartoon">
+    update cartoon
+    <set>
+      <if test="cartoonauthor != null">
+        cartoonAuthor = #{cartoonauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonauthorpic != null">
+        cartoonAuthorPic = #{cartoonauthorpic,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonname != null">
+        cartoonName = #{cartoonname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="firsttype != null">
+        firstType = #{firsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="followcount != null">
+        followCount = #{followcount,jdbcType=INTEGER},
+      </if>
+      <if test="hot != null">
+        hot = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="introduc != null">
+        introduc = #{introduc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="mainphoto != null">
+        mainPhoto = #{mainphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="midelphoto != null">
+        midelPhoto = #{midelphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="playcount != null">
+        playCount = #{playcount,jdbcType=INTEGER},
+      </if>
+      <if test="serialstate != null">
+        serialState = #{serialstate,jdbcType=VARCHAR},
+      </if>
+      <if test="smallphoto != null">
+        smallPhoto = #{smallphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null">
+        updateDate = #{updatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetile != null">
+        updateTile = #{updatetile,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetype != null">
+        updateType = #{updatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sharephoto != null">
+        sharePhoto = #{sharephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="anroidstate != null">
+        anroidState = #{anroidstate,jdbcType=INTEGER},
+      </if>
+      <if test="distributorstate != null">
+        distributorState = #{distributorstate,jdbcType=INTEGER},
+      </if>
+      <if test="iosstate != null">
+        iosState = #{iosstate,jdbcType=INTEGER},
+      </if>
+      <if test="recommendationindex != null">
+        recommendationIndex = #{recommendationindex,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.Cartoon">
+    update cartoon
+    set cartoonAuthor = #{cartoonauthor,jdbcType=VARCHAR},
+      cartoonAuthorPic = #{cartoonauthorpic,jdbcType=VARCHAR},
+      cartoonName = #{cartoonname,jdbcType=VARCHAR},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      firstType = #{firsttype,jdbcType=VARCHAR},
+      followCount = #{followcount,jdbcType=INTEGER},
+      hot = #{hot,jdbcType=INTEGER},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      introduc = #{introduc,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      mainPhoto = #{mainphoto,jdbcType=VARCHAR},
+      midelPhoto = #{midelphoto,jdbcType=VARCHAR},
+      playCount = #{playcount,jdbcType=INTEGER},
+      serialState = #{serialstate,jdbcType=VARCHAR},
+      smallPhoto = #{smallphoto,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      updateDate = #{updatedate,jdbcType=VARCHAR},
+      updateTile = #{updatetile,jdbcType=VARCHAR},
+      updateType = #{updatetype,jdbcType=VARCHAR},
+      sharePhoto = #{sharephoto,jdbcType=VARCHAR},
+      anroidState = #{anroidstate,jdbcType=INTEGER},
+      distributorState = #{distributorstate,jdbcType=INTEGER},
+      iosState = #{iosstate,jdbcType=INTEGER},
+      recommendationIndex = #{recommendationindex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

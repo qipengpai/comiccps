@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.Banner">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="click" jdbcType="INTEGER" property="click" />
+    <result column="comicUrl" jdbcType="VARCHAR" property="comicurl" />
+    <result column="httpImg" jdbcType="VARCHAR" property="httpimg" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="anroidState" jdbcType="INTEGER" property="anroidstate" />
+    <result column="iosState" jdbcType="INTEGER" property="iosstate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cartoonId, click, comicUrl, httpImg, implDate, state, title, anroidState, iosState
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from banner
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.Banner">
+    insert into banner (id, cartoonId, click, 
+      comicUrl, httpImg, implDate, 
+      state, title, anroidState, 
+      iosState)
+    values (#{id,jdbcType=VARCHAR}, #{cartoonid,jdbcType=VARCHAR}, #{click,jdbcType=INTEGER}, 
+      #{comicurl,jdbcType=VARCHAR}, #{httpimg,jdbcType=VARCHAR}, #{impldate,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{anroidstate,jdbcType=INTEGER}, 
+      #{iosstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.Banner">
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="click != null">
+        click,
+      </if>
+      <if test="comicurl != null">
+        comicUrl,
+      </if>
+      <if test="httpimg != null">
+        httpImg,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="anroidstate != null">
+        anroidState,
+      </if>
+      <if test="iosstate != null">
+        iosState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null">
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="comicurl != null">
+        #{comicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpimg != null">
+        #{httpimg,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="anroidstate != null">
+        #{anroidstate,jdbcType=INTEGER},
+      </if>
+      <if test="iosstate != null">
+        #{iosstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.Banner">
+    update banner
+    <set>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="click != null">
+        click = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="comicurl != null">
+        comicUrl = #{comicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpimg != null">
+        httpImg = #{httpimg,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="anroidstate != null">
+        anroidState = #{anroidstate,jdbcType=INTEGER},
+      </if>
+      <if test="iosstate != null">
+        iosState = #{iosstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.Banner">
+    update banner
+    set cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      click = #{click,jdbcType=INTEGER},
+      comicUrl = #{comicurl,jdbcType=VARCHAR},
+      httpImg = #{httpimg,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      anroidState = #{anroidstate,jdbcType=INTEGER},
+      iosState = #{iosstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

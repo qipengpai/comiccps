@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.Product">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="introduc" jdbcType="VARCHAR" property="introduc" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="productId" jdbcType="VARCHAR" property="productid" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="oldPrice" jdbcType="DOUBLE" property="oldprice" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="sale" jdbcType="DOUBLE" property="sale" />
+    <result column="saleState" jdbcType="INTEGER" property="salestate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hot, implDate, introduc, introduction, name, photo, price, productId, sort, state, 
+    type, oldPrice, currency, sale, saleState
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.Product">
+    insert into product (id, hot, implDate, 
+      introduc, introduction, name, 
+      photo, price, productId, 
+      sort, state, type, 
+      oldPrice, currency, sale, 
+      saleState)
+    values (#{id,jdbcType=VARCHAR}, #{hot,jdbcType=INTEGER}, #{impldate,jdbcType=VARCHAR}, 
+      #{introduc,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{productid,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{oldprice,jdbcType=DOUBLE}, #{currency,jdbcType=INTEGER}, #{sale,jdbcType=DOUBLE}, 
+      #{salestate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hot != null">
+        hot,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="introduc != null">
+        introduc,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="productid != null">
+        productId,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="oldprice != null">
+        oldPrice,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="sale != null">
+        sale,
+      </if>
+      <if test="salestate != null">
+        saleState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="introduc != null">
+        #{introduc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="oldprice != null">
+        #{oldprice,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="sale != null">
+        #{sale,jdbcType=DOUBLE},
+      </if>
+      <if test="salestate != null">
+        #{salestate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.Product">
+    update product
+    <set>
+      <if test="hot != null">
+        hot = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="introduc != null">
+        introduc = #{introduc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="productid != null">
+        productId = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="oldprice != null">
+        oldPrice = #{oldprice,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="sale != null">
+        sale = #{sale,jdbcType=DOUBLE},
+      </if>
+      <if test="salestate != null">
+        saleState = #{salestate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.Product">
+    update product
+    set hot = #{hot,jdbcType=INTEGER},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      introduc = #{introduc,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      productId = #{productid,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      oldPrice = #{oldprice,jdbcType=DOUBLE},
+      currency = #{currency,jdbcType=INTEGER},
+      sale = #{sale,jdbcType=DOUBLE},
+      saleState = #{salestate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

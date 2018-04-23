@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.CartoonSetMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.CartoonSet">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="barrageCount" jdbcType="VARCHAR" property="barragecount" />
+    <result column="buyCount" jdbcType="INTEGER" property="buycount" />
+    <result column="cartoonId" jdbcType="VARCHAR" property="cartoonid" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentcount" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="moneyState" jdbcType="INTEGER" property="moneystate" />
+    <result column="okCount" jdbcType="INTEGER" property="okcount" />
+    <result column="playCount" jdbcType="INTEGER" property="playcount" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="showPhoto" jdbcType="VARCHAR" property="showphoto" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="titile" jdbcType="VARCHAR" property="titile" />
+    <result column="updateDate" jdbcType="VARCHAR" property="updatedate" />
+    <result column="updateTitile" jdbcType="VARCHAR" property="updatetitile" />
+    <result column="vip" jdbcType="INTEGER" property="vip" />
+    <result column="watchState" jdbcType="INTEGER" property="watchstate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, barrageCount, buyCount, cartoonId, commentCount, details, implDate, moneyState, 
+    okCount, playCount, price, showPhoto, sort, titile, updateDate, updateTitile, vip, 
+    watchState
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartoonset
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cartoonset
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.CartoonSet">
+    insert into cartoonset (id, barrageCount, buyCount, 
+      cartoonId, commentCount, details, 
+      implDate, moneyState, okCount, 
+      playCount, price, showPhoto, 
+      sort, titile, updateDate, 
+      updateTitile, vip, watchState
+      )
+    values (#{id,jdbcType=VARCHAR}, #{barragecount,jdbcType=VARCHAR}, #{buycount,jdbcType=INTEGER}, 
+      #{cartoonid,jdbcType=VARCHAR}, #{commentcount,jdbcType=INTEGER}, #{details,jdbcType=VARCHAR}, 
+      #{impldate,jdbcType=VARCHAR}, #{moneystate,jdbcType=INTEGER}, #{okcount,jdbcType=INTEGER}, 
+      #{playcount,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{showphoto,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{titile,jdbcType=VARCHAR}, #{updatedate,jdbcType=VARCHAR}, 
+      #{updatetitile,jdbcType=VARCHAR}, #{vip,jdbcType=INTEGER}, #{watchstate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.CartoonSet">
+    insert into cartoonset
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="barragecount != null">
+        barrageCount,
+      </if>
+      <if test="buycount != null">
+        buyCount,
+      </if>
+      <if test="cartoonid != null">
+        cartoonId,
+      </if>
+      <if test="commentcount != null">
+        commentCount,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="moneystate != null">
+        moneyState,
+      </if>
+      <if test="okcount != null">
+        okCount,
+      </if>
+      <if test="playcount != null">
+        playCount,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="showphoto != null">
+        showPhoto,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="titile != null">
+        titile,
+      </if>
+      <if test="updatedate != null">
+        updateDate,
+      </if>
+      <if test="updatetitile != null">
+        updateTitile,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="watchstate != null">
+        watchState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="barragecount != null">
+        #{barragecount,jdbcType=VARCHAR},
+      </if>
+      <if test="buycount != null">
+        #{buycount,jdbcType=INTEGER},
+      </if>
+      <if test="cartoonid != null">
+        #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="moneystate != null">
+        #{moneystate,jdbcType=INTEGER},
+      </if>
+      <if test="okcount != null">
+        #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="playcount != null">
+        #{playcount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="showphoto != null">
+        #{showphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="titile != null">
+        #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetitile != null">
+        #{updatetitile,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="watchstate != null">
+        #{watchstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.CartoonSet">
+    update cartoonset
+    <set>
+      <if test="barragecount != null">
+        barrageCount = #{barragecount,jdbcType=VARCHAR},
+      </if>
+      <if test="buycount != null">
+        buyCount = #{buycount,jdbcType=INTEGER},
+      </if>
+      <if test="cartoonid != null">
+        cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null">
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="moneystate != null">
+        moneyState = #{moneystate,jdbcType=INTEGER},
+      </if>
+      <if test="okcount != null">
+        okCount = #{okcount,jdbcType=INTEGER},
+      </if>
+      <if test="playcount != null">
+        playCount = #{playcount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="showphoto != null">
+        showPhoto = #{showphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="titile != null">
+        titile = #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null">
+        updateDate = #{updatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetitile != null">
+        updateTitile = #{updatetitile,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="watchstate != null">
+        watchState = #{watchstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.CartoonSet">
+    update cartoonset
+    set barrageCount = #{barragecount,jdbcType=VARCHAR},
+      buyCount = #{buycount,jdbcType=INTEGER},
+      cartoonId = #{cartoonid,jdbcType=VARCHAR},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      details = #{details,jdbcType=VARCHAR},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      moneyState = #{moneystate,jdbcType=INTEGER},
+      okCount = #{okcount,jdbcType=INTEGER},
+      playCount = #{playcount,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      showPhoto = #{showphoto,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      titile = #{titile,jdbcType=VARCHAR},
+      updateDate = #{updatedate,jdbcType=VARCHAR},
+      updateTitile = #{updatetitile,jdbcType=VARCHAR},
+      vip = #{vip,jdbcType=INTEGER},
+      watchState = #{watchstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

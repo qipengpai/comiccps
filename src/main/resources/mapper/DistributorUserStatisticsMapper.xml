@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.DistributorUserStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DistributorUserStatistics">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="distridutionId" jdbcType="VARCHAR" property="distridutionid" />
+    <result column="manUser" jdbcType="INTEGER" property="manuser" />
+    <result column="newUser" jdbcType="INTEGER" property="newuser" />
+    <result column="noUser" jdbcType="INTEGER" property="nouser" />
+    <result column="payUser" jdbcType="INTEGER" property="payuser" />
+    <result column="statisticsDate" jdbcType="VARCHAR" property="statisticsdate" />
+    <result column="womanUser" jdbcType="INTEGER" property="womanuser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distridutionId, manUser, newUser, noUser, payUser, statisticsDate, womanUser
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from distributoruserstatistics
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from distributoruserstatistics
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DistributorUserStatistics">
+    insert into distributoruserstatistics (id, distridutionId, manUser, 
+      newUser, noUser, payUser, 
+      statisticsDate, womanUser)
+    values (#{id,jdbcType=VARCHAR}, #{distridutionid,jdbcType=VARCHAR}, #{manuser,jdbcType=INTEGER}, 
+      #{newuser,jdbcType=INTEGER}, #{nouser,jdbcType=INTEGER}, #{payuser,jdbcType=INTEGER}, 
+      #{statisticsdate,jdbcType=VARCHAR}, #{womanuser,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DistributorUserStatistics">
+    insert into distributoruserstatistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distridutionid != null">
+        distridutionId,
+      </if>
+      <if test="manuser != null">
+        manUser,
+      </if>
+      <if test="newuser != null">
+        newUser,
+      </if>
+      <if test="nouser != null">
+        noUser,
+      </if>
+      <if test="payuser != null">
+        payUser,
+      </if>
+      <if test="statisticsdate != null">
+        statisticsDate,
+      </if>
+      <if test="womanuser != null">
+        womanUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="distridutionid != null">
+        #{distridutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="manuser != null">
+        #{manuser,jdbcType=INTEGER},
+      </if>
+      <if test="newuser != null">
+        #{newuser,jdbcType=INTEGER},
+      </if>
+      <if test="nouser != null">
+        #{nouser,jdbcType=INTEGER},
+      </if>
+      <if test="payuser != null">
+        #{payuser,jdbcType=INTEGER},
+      </if>
+      <if test="statisticsdate != null">
+        #{statisticsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="womanuser != null">
+        #{womanuser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DistributorUserStatistics">
+    update distributoruserstatistics
+    <set>
+      <if test="distridutionid != null">
+        distridutionId = #{distridutionid,jdbcType=VARCHAR},
+      </if>
+      <if test="manuser != null">
+        manUser = #{manuser,jdbcType=INTEGER},
+      </if>
+      <if test="newuser != null">
+        newUser = #{newuser,jdbcType=INTEGER},
+      </if>
+      <if test="nouser != null">
+        noUser = #{nouser,jdbcType=INTEGER},
+      </if>
+      <if test="payuser != null">
+        payUser = #{payuser,jdbcType=INTEGER},
+      </if>
+      <if test="statisticsdate != null">
+        statisticsDate = #{statisticsdate,jdbcType=VARCHAR},
+      </if>
+      <if test="womanuser != null">
+        womanUser = #{womanuser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DistributorUserStatistics">
+    update distributoruserstatistics
+    set distridutionId = #{distridutionid,jdbcType=VARCHAR},
+      manUser = #{manuser,jdbcType=INTEGER},
+      newUser = #{newuser,jdbcType=INTEGER},
+      noUser = #{nouser,jdbcType=INTEGER},
+      payUser = #{payuser,jdbcType=INTEGER},
+      statisticsDate = #{statisticsdate,jdbcType=VARCHAR},
+      womanUser = #{womanuser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

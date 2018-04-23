@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.FeedBackMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.FeedBack">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="backDate" jdbcType="VARCHAR" property="backdate" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="implDaye" jdbcType="VARCHAR" property="impldaye" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, backDate, content, implDaye, userId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from feedback
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.FeedBack">
+    insert into feedback (id, backDate, content, 
+      implDaye, userId)
+    values (#{id,jdbcType=VARCHAR}, #{backdate,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{impldaye,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.FeedBack">
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="backdate != null">
+        backDate,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="impldaye != null">
+        implDaye,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="backdate != null">
+        #{backdate,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="impldaye != null">
+        #{impldaye,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.FeedBack">
+    update feedback
+    <set>
+      <if test="backdate != null">
+        backDate = #{backdate,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="impldaye != null">
+        implDaye = #{impldaye,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.FeedBack">
+    update feedback
+    set backDate = #{backdate,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      implDaye = #{impldaye,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--（条件）分页查询反馈列表-->
+  <select id="getAllFeedBack">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM FeedBack WHERE 1=1
+    <if test="condition != null">
+      AND ((userId LIKE CONCAT('%',#{condition},'%'))
+      OR (content LIKE CONCAT('%',#{condition},'%')))
+    </if>
+    <if test="startDate != null">
+    AND backDate BETWEEN startDate AND DATE_ADD(endDate,INTERVAL 1 DAY)
+    </if>
+    ORDER BY backDate DESC
+  </select>
+</mapper>
