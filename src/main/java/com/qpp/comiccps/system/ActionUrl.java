@@ -38,8 +38,13 @@ public class ActionUrl {
 
 
     // （条件）分页咔咔豆订单查询
-    public static final String SELECT_KAKABEAN_ORDER = "/crxl/qpp/comicCps/selectKakaBeanOrder";
+    public static final String SELECT_CARTOON_MALL_ORDER = "/crxl/qpp/comicCps/selectKakaBeanOrder";
+    // （条件）咔咔豆收益
+    public static final String SELECT_CARTOON_MALL_ORDER_TOTAL = "/crxl/qpp/comicCps/selectKakaOrderTotal";
 
 
+
+    // 后台查询各公众号现金收益(新)
+    public static final String SELECT_CARTOON_PROFIT_NEW = "/crxl/qpp/comicCps/select/cartoon/profit/new";
 
 }

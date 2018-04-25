@@ -65,4 +65,16 @@ public class DistributorWithdrawalsServiceImpl {
             throw new BusinessException("回滚异常");
         return true;
     }
+
+    /**
+     *    结算单求和
+     *
+     * @author pengpai
+     * @date 2018/4/25 11:59
+     * @param withdrawalsState, pageInfo, uid
+     * @return java.lang.Double
+     */
+    public Double selectSumDistributorWithdrawals(String withdrawalsState, PageInfo pageInfo, String uid) {
+        return distributorWithdrawalsMapper.selectSumDistributorWithdrawals(withdrawalsState,pageInfo,uid);
+    }
 }

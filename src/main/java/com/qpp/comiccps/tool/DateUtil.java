@@ -1,5 +1,7 @@
 package com.qpp.comiccps.tool;
 
+import com.qpp.comiccps.exception.BusinessException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -97,8 +99,6 @@ public class DateUtil {
 	}
 	/**
 	* 判断时间相差几天
-	* @param fDate yyyy-MM-dd 格式
-	* @param oDate 应写当前时间
 	* @return 时间为-1时，请检查代码
 	* @throws ParseException 
 	*/
@@ -123,5 +123,69 @@ public class DateUtil {
 	public static Date getDateFormat(String time) throws ParseException{
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	return sdf.parse(time);
+	}
+
+	/**
+	 *    验证开始时间是否大于结束时间
+	 *
+	 * @author pengpai
+	 * @date 2018/4/25 17:26
+	 * @param startDate, endDate
+	 * @return boolean
+	 */
+	public static boolean checkLongDate(String startDate, String endDate) {
+		if (!ParaClick.clickString(startDate) && !ParaClick.clickString(endDate)) {
+			Long start = 0L;
+			Long end = 0L;
+			start = DateUtil.getdate_yyyy_MM_dd_00_00_00(startDate + " 00:00:00").getTime();
+			end = DateUtil.getdate_yyyy_MM_dd_00_00_00(endDate + " 23:59:59").getTime();
+			if (start > end) {
+				return false;
+			}
+			return true;
+		}else if ((ParaClick.clickString(startDate)&&!ParaClick.clickString(endDate))
+				|| (!ParaClick.clickString(startDate)&&ParaClick.clickString(endDate))) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	/**
+	 *    检查时间 如果错误跑出异常 正确则判断是否为空 如果为空则赋值今天时间
+	 *
+	 * @author pengpai
+	 * @date 2018/4/25 19:05
+	 * @param pageInfo
+	 * @return com.qpp.comiccps.tool.PageInfo
+	 */
+	public static PageInfo checkTodayTime(PageInfo pageInfo) {
+		if (!checkLongDate(pageInfo.getStartDate(),pageInfo.getEndDate())) {
+			throw new BusinessException("时间错误");
+		}
+		if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())){
+			pageInfo.setStartDate(DateUtil.getdate_yyyy_MM_dd());
+			pageInfo.setEndDate(DateUtil.getdate_yyyy_MM_dd());
+		}
+		return pageInfo;
+	}
+
+	/**
+	 *    检查时间 如果错误跑出异常 正确则判断是否为空 如果为空则赋值昨天时间
+	 *
+	 * @author pengpai
+	 * @date 2018/4/25 19:07
+	 * @param pageInfo
+	 * @return com.qpp.comiccps.tool.PageInfo
+	 */
+	public static PageInfo checkYesterdayTime(PageInfo pageInfo) {
+		if (!checkLongDate(pageInfo.getStartDate(),pageInfo.getEndDate())) {
+			throw new BusinessException("时间错误");
+		}
+		if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())){
+			pageInfo.setStartDate(DateUtil.getdate_yyyy_MM_dd());
+			pageInfo.setEndDate(DateUtil.getdate_yyyy_MM_dd());
+		}
+		return pageInfo;
 	}
 }

@@ -2,7 +2,9 @@ package com.qpp.comiccps.basics.dao;
 
 import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.UserOrder;
+import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
 import com.qpp.comiccps.tool.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,4 +23,15 @@ public interface UserOrderMapper {
 
     // （条件）分页查询用户订单列表
     Page<UserOrder> getAllUserOrder(PageInfo pageInfo);
+
+    // 用户订单求和
+    Double getAllUserOrderSum(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
+    // 分页条件查询现金收益列表
+    Page<UserOrderProfitNew> selectOrderProfitNew(PageInfo pageInfo);
+
+    // 查询现金收益
+    Double selectOrderProfitNewSum(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
+
 }

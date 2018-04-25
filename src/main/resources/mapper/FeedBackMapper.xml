@@ -101,7 +101,7 @@
       OR (content LIKE CONCAT('%',#{condition},'%')))
     </if>
     <if test="startDate != null">
-    AND backDate BETWEEN startDate AND DATE_ADD(endDate,INTERVAL 1 DAY)
+    AND backDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
     </if>
     ORDER BY backDate DESC
   </select>

@@ -28,4 +28,10 @@ public interface DistributorWithdrawalsMapper {
 
     // 打款后完成订单
     int finishDistributorWithdrawals(@Param("id")String id);
+
+
+    // 结算单求和
+    Double selectSumDistributorWithdrawals(@Param("withdrawalsState")String withdrawalsState,
+                                           PageInfo pageInfo,
+                                           @Param("uid") String uid);
 }

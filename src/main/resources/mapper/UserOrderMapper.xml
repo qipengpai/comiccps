@@ -202,9 +202,43 @@
       OR (orderIntegral LIKE LIKE CONCAT('%',#{condition},'%'))
       OR (orderUserName LIKE LIKE CONCAT('%',#{condition},'%')))
     </if>
-    <if test="startDate != null">
-      AND orderImplDate BETWEEN startDate AND DATE_ADD(endDate,INTERVAL 1 DAY)
-    </if>
-    order by orderImplDate DESC
+    AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    ORDER BY orderDate DESC
   </select>
+
+  <!--用户订单求和-->
+  <select id="getAllUserOrderSum" resultType="java.lang.Double">
+    SELECT SUM(orderMoney) FROM UserOrder WHERE orderState=1
+    <if test="condition != null">
+      AND ((orderNum LIKE CONCAT('%',#{condition},'%'))
+      OR (orderDescription LIKE CONCAT('%',#{condition},'%'))
+      OR (orderUserId LIKE CONCAT('%',#{condition},'%'))
+      OR (orderIntegral LIKE LIKE CONCAT('%',#{condition},'%'))
+      OR (orderUserName LIKE LIKE CONCAT('%',#{condition},'%')))
+    </if>
+    AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+  </select>
+
+  <!--分页条件查询现金收益列表-->
+  <select id="selectOrderProfitNew" resultType="com.qpp.comiccps.basics.entity.data.UserOrderProfitNew">
+    SELECT d.userName AS username,o.orderIntegral AS qd,SUM(o.orderMoney) as money
+    FROM UserEntity AS u,UserOrder AS o,Distributor AS d WHERE u.userId=o.orderUserId
+    AND d.qd=u.orderIntegral AND o.orderState=1
+    AND o.orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    AND o.orderDate>='2018-02-24 14:08:30' GROUP BY o.orderIntegral
+  </select>
+
+  <!--查询现金收益-->
+  <select id="selectOrderProfitNewSum" resultType="java.lang.Double">
+    SELECT SUM(orderMoney) FROM UserOrder WHERE orderState=1
+    AND o.orderDate>='2018-02-24 14:08:30'  AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+  </select>
+
+
+
+
+
+
+
+
 </mapper>

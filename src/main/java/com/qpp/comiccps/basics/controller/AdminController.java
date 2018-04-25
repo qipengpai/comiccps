@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class AdminController {
@@ -53,7 +55,10 @@ public class AdminController {
         //System.out.println(JWTUtil.sign(distributor.getUsername(), MD5.getMd5(distributor.getUserpwd())));
         request.getSession().setAttribute("userInfo", admin1.getUid());
         request.getSession().setMaxInactiveInterval(1800);
-        return new Model(admin1, JWTUtil.sign(admin1.getUsername(), MD5.getMd5(admin1.getPassword())));
+        Map<String,Object> map =new HashMap<>();
+        map.put("userName",admin1.getUsername());
+        map.put("isSystem",admin1.getIsSystem());
+        return new Model(map, JWTUtil.sign(admin1.getUsername(), MD5.getMd5(admin1.getPassword())));
     }
 
     /**

@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.DistributorWithdrawals;
 import com.qpp.comiccps.basics.service.impl.DistributorWithdrawalsServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
+import com.qpp.comiccps.tool.DateUtil;
 import com.qpp.comiccps.tool.Model;
 import com.qpp.comiccps.tool.PageInfo;
 import com.qpp.comiccps.tool.ParaClick;
@@ -47,13 +48,23 @@ public class DistributorWithdrawalsController {
     @RequiresPermissions("withdrawals:select")
     public Model getDistributor(HttpServletRequest request, @RequestParam("withdrawalsState") String withdrawalsState, PageInfo pageInfo)
             throws Exception {
-        //  分页查询分销商列表
+        if (!DateUtil.checkLongDate(pageInfo.getStartDate(), pageInfo.getEndDate())) {
+            return new Model(500, "时间有误");
+        }else {
+            if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())) {
+                pageInfo.setStartDate(DateUtil.getYesterday());
+                pageInfo.setEndDate(DateUtil.getYesterday());
+            }
+        }
+        //  分页查询分销商结算单列表
         String uid = (String) request.getSession().getAttribute("userInfo");
         Page<DistributorWithdrawals> list = distributorWithdrawalsService.selectDistributorWithdrawals(withdrawalsState,pageInfo,uid);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
+        // 结算单求和
+        Double sum = distributorWithdrawalsService.selectSumDistributorWithdrawals(withdrawalsState,pageInfo,uid);
         PageInfo<DistributorWithdrawals> pageInfos = new PageInfo<>(list);
-        return new Model(pageInfos);
+        return new Model(pageInfos,sum);
     }
 
 

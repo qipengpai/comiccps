@@ -15,7 +15,7 @@
     uid, username, password, state, salt, is_system, created_at, updated_at
     </sql>
     <sql id="Custom_Column_List">
-        uid, username, state
+        uid, username, state, created_at
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -118,16 +118,16 @@
         where uid = #{uid,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.Admin">
-    update admin
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      salt = #{salt,jdbcType=VARCHAR},
-      is_system = #{isSystem,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=VARCHAR},
-      updated_at = #{updatedAt,jdbcType=VARCHAR}
-    where uid = #{uid,jdbcType=VARCHAR}
-  </update>
+        update admin
+        set username = #{username,jdbcType=VARCHAR},
+          password = #{password,jdbcType=VARCHAR},
+          state = #{state,jdbcType=INTEGER},
+          salt = #{salt,jdbcType=VARCHAR},
+          is_system = #{isSystem,jdbcType=VARCHAR},
+          created_at = #{createdAt,jdbcType=VARCHAR},
+          updated_at = #{updatedAt,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=VARCHAR}
+    </update>
 
     <!--cps用户登录-->
     <select id="cpsAdminLogin" resultMap="BaseResultMap">
@@ -206,9 +206,9 @@
 
     <!--查询所有CPS用户-->
     <select id="getAllCpsAdmin" resultMap="BaseResultMap">
-       SELECT
-       <include refid="Custom_Column_List"/>
-       FROM Admin
+        SELECT
+        <include refid="Custom_Column_List"/>
+        FROM Admin
     </select>
 
     <!--解除绑定前验证密码-->
