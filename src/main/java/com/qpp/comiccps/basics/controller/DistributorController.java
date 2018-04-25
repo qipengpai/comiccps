@@ -117,7 +117,7 @@ public class DistributorController {
     })
     @PostMapping(value = ActionUrl.ADMIN_UPDATE_DISTRIBUTOR)
     @RequiresAuthentication
-    @RequiresPermissions("distributor:create")
+    @RequiresPermissions("distributor:update")
     public Model updateDistributor(DistributorData distributorData)
             throws Exception {
         if (!ParaClick.clickString(distributorData.getId()))

@@ -15,6 +15,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,7 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.CPS_ADMIN_LOGIN)
-    public Model userRegisterSend(Admin admin)
+    public Model userRegisterSend(HttpServletRequest request, Admin admin)
             throws Exception {
         if (ParaClick.clickString(admin.getUsername()))
             return new Model(500, "请输入账号");
@@ -50,6 +51,8 @@ public class AdminController {
         if (admin1 == null)
             return new Model(500, "用户名或密码错误");
         //System.out.println(JWTUtil.sign(distributor.getUsername(), MD5.getMd5(distributor.getUserpwd())));
+        request.getSession().setAttribute("userInfo", admin1.getUid());
+        request.getSession().setMaxInactiveInterval(1800);
         return new Model(admin1, JWTUtil.sign(admin1.getUsername(), MD5.getMd5(admin1.getPassword())));
     }
 

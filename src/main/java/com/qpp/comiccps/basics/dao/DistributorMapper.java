@@ -32,4 +32,9 @@ public interface DistributorMapper {
 
     // 解除绑定
     int updateDistributorNull(@Param("id") String id);
+
+    // 增加已结算收益 并减少未结算收益
+    int updateOverReCharge(@Param("overrecharge")Double overrecharge,
+                           @Param("balance")Double balance,
+                           @Param("id")String id);
 }

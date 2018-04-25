@@ -21,15 +21,24 @@ public class ActionUrl {
 
 
     //（条件）分页查询分销商列表
-    public static final String ADMIN_GET_ALL_DISTRIBUTOR="/crxl/qpp/comicCps/admin/get/getAllDistributor";
+    public static final String ADMIN_GET_ALL_DISTRIBUTOR="/crxl/qpp/comicCps/get/getAllDistributor";
     // 增加分销商
-    public static final String ADMIN_ADD_DISTRIBUTOR="/crxl/qpp/comicCps/admin/addDistributor";
+    public static final String ADMIN_ADD_DISTRIBUTOR="/crxl/qpp/comicCps/addDistributor";
     // 修改分销商
-    public static final String ADMIN_UPDATE_DISTRIBUTOR="/crxl/qpp/comicCps/admin/updateDistributor";
+    public static final String ADMIN_UPDATE_DISTRIBUTOR="/crxl/qpp/comicCps/updateDistributor";
     // 根据id查询分销商
-    public static final String ADMIN_GET_DISTRIBUTOR_BYID="/crxl/qpp/comicCps/admin/getDistributorId";
+    public static final String ADMIN_GET_DISTRIBUTOR_BYID="/crxl/qpp/comicCps/getDistributorId";
     // 解除绑定Cps用户与分销商
-    public static final String BINDING_CPS_DISTRIBUTOR="/crxl/qpp/comicCps/admin/bindingCpsAndDistributor";
+    public static final String BINDING_CPS_DISTRIBUTOR="/crxl/qpp/comicCps/bindingCpsAndDistributor";
+
+    // (条件)分页查看分销商结算单
+    public static final String DISTRIBUTOR_WITHDRAWALS_GET="/crxl/qpp/comicCps/distributor/selectWitndrawals";
+    // 付款后完成结算单
+    public static final String DISTRIBUTOR_WITHDRAWALS_FINISH = "/crxl/qpp/comicCps/finish/distributor/finishWitndrawals";
+
+
+    // （条件）分页咔咔豆订单查询
+    public static final String SELECT_KAKABEAN_ORDER = "/crxl/qpp/comicCps/selectKakaBeanOrder";
 
 
 

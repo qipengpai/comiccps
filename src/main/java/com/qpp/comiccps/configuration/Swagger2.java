@@ -23,9 +23,9 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("springboot利用swagger构建api文档")
-                .description("虽然用的不是很明白.但也要简单优雅的restfun风格")
-                .termsOfServiceUrl("http://blog.csdn.net/saytime")
+                .title("Provide ComicCPS API")
+                .description("Although it is not very clear, but also simple and elegant rest style.")
+                .termsOfServiceUrl("http://www.kakamanhua.com/Comic/admin/index.html")
                 .version("1.0")
                 .build();
     }

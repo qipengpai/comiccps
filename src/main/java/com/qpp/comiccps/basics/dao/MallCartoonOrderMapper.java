@@ -1,7 +1,9 @@
 package com.qpp.comiccps.basics.dao;
 
 import com.qpp.comiccps.basics.entity.MallCartoonOrder;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MallCartoonOrderMapper {
     int deleteByPrimaryKey(String id);
 

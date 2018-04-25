@@ -10,8 +10,11 @@ public class Uuid {
 	// }
 	// }
 	public static void main(String[] args) {
-		String uuid = getUUID();
-		System.out.println(uuid);
+		for (int i = 0; i <5; i++) {
+			String uuid = getUUID();
+			System.out.println(uuid);
+		}
+
 	}
 
 	/**

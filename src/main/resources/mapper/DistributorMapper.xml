@@ -489,6 +489,15 @@
     <set>
       userType = #{NULL,jdbcType=VARCHAR},
     </set>
-    where id = #{id,jdbcType=VARCHAR}s
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateOverReCharge">
+     update distributor
+    <set>
+      overRecharge = #{overrecharge,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE}
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

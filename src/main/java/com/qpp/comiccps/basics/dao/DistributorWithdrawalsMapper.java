@@ -1,7 +1,12 @@
 package com.qpp.comiccps.basics.dao;
 
+import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.DistributorWithdrawals;
+import com.qpp.comiccps.tool.PageInfo;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DistributorWithdrawalsMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,4 +19,13 @@ public interface DistributorWithdrawalsMapper {
     int updateByPrimaryKeySelective(DistributorWithdrawals record);
 
     int updateByPrimaryKey(DistributorWithdrawals record);
+
+    // （条件）分页查看分销商结算单
+    Page<DistributorWithdrawals> selectDistributorWithdrawals(@Param("withdrawalsState") String withdrawalsState,
+                                                              PageInfo pageInfo,
+                                                              @Param("uid") String uid);
+
+
+    // 打款后完成订单
+    int finishDistributorWithdrawals(@Param("id")String id);
 }
