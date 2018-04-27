@@ -11,6 +11,38 @@
         <result column="created_at" jdbcType="VARCHAR" property="createdAt"/>
         <result column="updated_at" jdbcType="VARCHAR" property="updatedAt"/>
     </resultMap>
+
+    <resultMap id="CustomResultMap" type="com.qpp.comiccps.basics.entity.Admin">
+        <id column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="is_system" jdbcType="VARCHAR" property="isSystem"/>
+        <result column="created_at" jdbcType="VARCHAR" property="createdAt"/>
+        <result column="updated_at" jdbcType="VARCHAR" property="updatedAt"/>
+        <collection property="roleList" ofType="com.qpp.comiccps.basics.entity.CpsRole">
+            <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+            <result column="enable" jdbcType="INTEGER" property="enable" />
+            <result column="created_at" jdbcType="VARCHAR" property="createdAt" />
+            <result column="updated_at" jdbcType="VARCHAR" property="updatedAt" />
+            <collection property="menuList"  ofType="com.qpp.comiccps.basics.entity.Menu">
+                <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+                <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+                <result column="menu_type" jdbcType="VARCHAR" property="menuType" />
+                <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+                <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+                <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+                <result column="parent_ids" jdbcType="VARCHAR" property="parentIds" />
+                <result column="child_num" jdbcType="INTEGER" property="childNum" />
+                <result column="listorder" jdbcType="INTEGER" property="listorder" />
+                <result column="created_at" jdbcType="VARCHAR" property="createdAt" />
+                <result column="updated_at" jdbcType="VARCHAR" property="updatedAt" />
+            </collection>
+        </collection>
+    </resultMap>
     <sql id="Base_Column_List">
     uid, username, password, state, salt, is_system, created_at, updated_at
     </sql>
@@ -220,4 +252,10 @@
         AND password = #{password,jdbcType=VARCHAR}
     </select>
 
+    <!--获取角色权限-->
+    <select id="getCpsAdminRoleMenu" resultMap="CustomResultMap">
+      SELECT a.*,c.*,m.* FROM admin AS a,admin_role AS ar,cps_role AS c,menu AS m,role_menu AS rm
+      WHERE a.uid=ar.admin_id AND ar.role_id = c.role_id AND c.role_id = rm.role_id AND m.menu_id = rm.menu_id
+      AND a.username=#{username}
+    </select>
 </mapper>

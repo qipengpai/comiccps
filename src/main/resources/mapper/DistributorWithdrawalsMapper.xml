@@ -159,14 +159,15 @@
   <select id="selectDistributorWithdrawals" resultMap="BaseResultMap">
     SELECT dw.* FROM DistributorWithdrawals AS dw,Distributor AS d
     WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
-    <if test="uid != 'ad313d38fe9447ce863fe8584743a010' or uid != '1e67f167d99c43f897ec6566043ad6ec'">
+    <if test="uid != 'ad313d38fe9447ce863fe8584743a010'">
       AND d.userType=#{uid,jdbcType=VARCHAR}
     </if>
     <if test="withdrawalsState != null">
       AND dw.withdrawalsState= #{withdrawalsstate}
     </if>
     <if test="condition != null">
-      AND ((dw.distridutionId LIKE CONCAT('%',#{condition},'%'))OR(remarks LIKE CONCAT('%',#{condition},'%'))
+      AND ( LOCATE(#{condition},dw.distridutionId)>0
+      OR LOCATE(#{condition},dw.remarks)>0 )
     </if>
     <if test="startDate != null">
       AND dw.withdrawalsDate  BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)

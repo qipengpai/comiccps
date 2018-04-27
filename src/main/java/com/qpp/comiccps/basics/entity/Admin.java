@@ -21,7 +21,8 @@ public class Admin implements Serializable {
     private String createdAt;
 
     private String updatedAt;
-
+    @JsonIgnore
+    private List<CpsRole> roleList;
 
     public String getUid() {
         return uid;
@@ -88,5 +89,11 @@ public class Admin implements Serializable {
     }
 
 
+    public List<CpsRole> getRoleList() {
+        return roleList;
+    }
 
+    public void setRoleList(List<CpsRole> roleList) {
+        this.roleList = roleList;
+    }
 }

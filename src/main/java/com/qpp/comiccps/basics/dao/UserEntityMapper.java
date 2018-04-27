@@ -19,6 +19,12 @@ public interface UserEntityMapper {
 
     int updateByPrimaryKey(UserEntity record);
 
-    //（条件）分页查询用户列表
+    //分页查询用户列表
     Page<UserEntity> getAllUserEntity(PageInfo pageInfo);
+
+    //（条件）分页查询用户列表
+    Page<UserEntity> getConditionUserEntity(PageInfo pageInfo);
+
+    //分页查询用户列表>1000
+    Page<UserEntity> getAllUserEntityBetter1000(PageInfo pageInfo);
 }

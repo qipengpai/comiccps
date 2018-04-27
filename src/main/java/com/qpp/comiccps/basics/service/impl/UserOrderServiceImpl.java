@@ -6,8 +6,11 @@ import com.qpp.comiccps.basics.dao.UserOrderMapper;
 import com.qpp.comiccps.basics.entity.UserOrder;
 import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
 import com.qpp.comiccps.tool.PageInfo;
+import com.qpp.comiccps.tool.ParaClick;
+import com.qpp.comiccps.tool.StringToInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.nio.cs.ext.PCK;
 
 @Service
 public class UserOrderServiceImpl {
@@ -25,6 +28,8 @@ public class UserOrderServiceImpl {
      */
     public Page<UserOrder> getAllUserOrder(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
+        if (!ParaClick.clickString(pageInfo.getCondition()))
+            pageInfo.setCondition2(StringToInt.toInt(pageInfo.getCondition()));
         return userOrderMapper.getAllUserOrder(pageInfo);
     }
 
@@ -37,7 +42,9 @@ public class UserOrderServiceImpl {
      * @return java.lang.Double
      */
     public Double getAllUserOrderSum(PageInfo pageInfo) {
-        return userOrderMapper.getAllUserOrderSum(pageInfo.getStartDate(),pageInfo.getEndDate());
+        if (!ParaClick.clickString(pageInfo.getCondition()))
+            pageInfo.setCondition2(StringToInt.toInt(pageInfo.getCondition()));
+        return userOrderMapper.getAllUserOrderSum(pageInfo);
     }
 
 
@@ -66,5 +73,18 @@ public class UserOrderServiceImpl {
         return userOrderMapper.selectOrderProfitNewSum(pageInfo.getStartDate(),pageInfo.getEndDate());
     }
 
-
+    /**
+     *    每日定时清除无效订单
+     *
+     * @author pengpai
+     * @date 2018/4/27 14:51
+     * @param
+     * @return boolean
+     */
+    public boolean deleteInvalidOrder() {
+        int index = userOrderMapper.deleteInvalidOrder();
+        if (index<1)
+            return false;
+        return true;
+    }
 }

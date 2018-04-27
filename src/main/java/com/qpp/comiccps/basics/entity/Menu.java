@@ -1,9 +1,7 @@
 package com.qpp.comiccps.basics.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Menu implements Serializable{
     private String menuId;
@@ -29,7 +27,7 @@ public class Menu implements Serializable{
     private String updatedAt;
 
 //    @JsonIgnore
-//    private List<CpsRole> roleList; //角色 -- 权限关系：多对多关系;
+//    private CpsRole role; //角色 -- 权限关系：多对多关系;
 
     public String getMenuId() {
         return menuId;

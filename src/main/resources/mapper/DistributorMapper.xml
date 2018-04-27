@@ -279,11 +279,11 @@
     SELECT
     <include refid="Custom_Column_List"/>
     FROM Distributor WHERE 1=1
-    <if test="condition !=null">
-      AND ((nickName LIKE CONCAT('%',#{condition},'%'))
-      OR(phone LIKE CONCAT('%',#{condition},'%')))
+    <if test="condition != null">
+      AND (LOCATE(#{condition},nickName)>0
+      OR LOCATE(#{condition},phone)>0)
     </if>
-    ORDER BY implDate DESC
+    ORDER BY allRecharge DESC
   </select>
 
   <!--增加分销商并绑定CPS-->

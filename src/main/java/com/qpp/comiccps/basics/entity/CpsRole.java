@@ -18,7 +18,20 @@ public class CpsRole implements Serializable {
 
     private String updatedAt;
 
-//    @JsonIgnore
+
+    @JsonIgnore
+    private List<Menu> menuList;
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
+
+
+    //    @JsonIgnore
 //    private List<Admin> adminList;// 一个角色对应多个用户
 //
 //    @JsonIgnore

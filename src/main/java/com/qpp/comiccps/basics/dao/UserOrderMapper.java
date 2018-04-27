@@ -25,7 +25,7 @@ public interface UserOrderMapper {
     Page<UserOrder> getAllUserOrder(PageInfo pageInfo);
 
     // 用户订单求和
-    Double getAllUserOrderSum(@Param("startDate") String startDate, @Param("endDate") String endDate);
+    Double getAllUserOrderSum(PageInfo pageInfo);
 
     // 分页条件查询现金收益列表
     Page<UserOrderProfitNew> selectOrderProfitNew(PageInfo pageInfo);
@@ -33,5 +33,6 @@ public interface UserOrderMapper {
     // 查询现金收益
     Double selectOrderProfitNewSum(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
-
+    // 每日定时清除无效订单
+    int deleteInvalidOrder();
 }

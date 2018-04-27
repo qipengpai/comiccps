@@ -2,10 +2,9 @@ package com.qpp.comiccps.basics.controller.exception;
 
 import com.qpp.comiccps.tool.Model;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CustomException {
@@ -21,6 +20,7 @@ public class CustomException {
     @RequestMapping(path = "/401")
     @ResponseStatus(value =HttpStatus.UNAUTHORIZED,reason = "认证失败")
     public Model unauthorized() {
+        System.out.println("4");
         return new Model(401, "Unauthorized", null);
     }
 
@@ -36,6 +36,7 @@ public class CustomException {
     @RequestMapping(path = "/403")
     @ResponseStatus(value = HttpStatus.FORBIDDEN,reason = "暂无权限")
     public Model unauthorization() {
+        System.out.println("5");
         return new Model(403, "unauthorization", null);
     }
 

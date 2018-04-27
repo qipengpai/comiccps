@@ -38,16 +38,30 @@ public class UserEntityController {
             @ApiImplicitParam(name = "pageSize", value = "每页的数量", required = true, dataType = "String", paramType = "query")
     })
     @PostMapping(value = ActionUrl.ADMIN_GET_ALL_USER)
-    @RequiresAuthentication
     @RequiresPermissions("userEntity:select")
     public Model getUserEntity(PageInfo pageInfo)
             throws Exception {
-        if (pageInfo.getPageNum()==0)
-            pageInfo.setPageNum(1);
         //  查询平台用户列表
-        Page<UserEntity> list = userEntityService.getAllUserEntity(pageInfo);
+        Page<UserEntity> list;
+        if(ParaClick.clickString(pageInfo.getCondition())){
+            list= userEntityService.getAllUserEntity(pageInfo);
+        }else{
+            list= userEntityService.getAllUserEntityByCondition(pageInfo);
+        }
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
+        for (UserEntity userEntity:list) {
+            userEntity.setCity(StringToInt.toString(userEntity.getCity()));
+            if(!ParaClick.clickString(userEntity.getStartdate())&&!ParaClick.clickString(userEntity.getEnddate())) {
+                userEntity.setStartdate(userEntity.getStartdate().substring(0, userEntity.getStartdate().lastIndexOf(" ")));
+                userEntity.setEnddate(userEntity.getEnddate().substring(0, userEntity.getEnddate().lastIndexOf(" ")));
+            }
+            try {
+                userEntity.setUsername(StringToInt.toString(userEntity.getUsername()));
+            } catch (Exception e) {
+                userEntity.setNickname("漫画用户");
+            }
+        }
         PageInfo<UserEntity> pageInfos = new PageInfo<>(list);
         return new Model(pageInfos);
     }

@@ -195,14 +195,16 @@
     SELECT
     <include refid="Custom_Column_List"/>
     FROM UserOrder WHERE orderState=1
-    <if test="condition != null">
-      AND ((orderNum LIKE CONCAT('%',#{condition},'%'))
-      OR (orderDescription LIKE CONCAT('%',#{condition},'%'))
-      OR (orderUserId LIKE CONCAT('%',#{condition},'%'))
-      OR (orderIntegral LIKE LIKE CONCAT('%',#{condition},'%'))
-      OR (orderUserName LIKE LIKE CONCAT('%',#{condition},'%')))
+    <if test="condition != null ">
+      AND ( LOCATE(#{condition}, `orderNum`)>0
+      OR LOCATE(#{condition}, `orderDescription`)>0
+      OR LOCATE(#{condition}, `orderUserId`)>0
+      OR LOCATE(#{condition}, `orderIntegral`)>0
+      OR LOCATE(#{condition2}, `orderUserName`)>0 )
     </if>
-    AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    <if test="startDate != null">
+      AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    </if>
     ORDER BY orderDate DESC
   </select>
 
@@ -210,11 +212,11 @@
   <select id="getAllUserOrderSum" resultType="java.lang.Double">
     SELECT SUM(orderMoney) FROM UserOrder WHERE orderState=1
     <if test="condition != null">
-      AND ((orderNum LIKE CONCAT('%',#{condition},'%'))
-      OR (orderDescription LIKE CONCAT('%',#{condition},'%'))
-      OR (orderUserId LIKE CONCAT('%',#{condition},'%'))
-      OR (orderIntegral LIKE LIKE CONCAT('%',#{condition},'%'))
-      OR (orderUserName LIKE LIKE CONCAT('%',#{condition},'%')))
+      AND ( LOCATE(#{condition}, `orderNum`)>0
+      OR LOCATE(#{condition}, `orderDescription`)>0
+      OR LOCATE(#{condition}, `orderUserId`)>0
+      OR LOCATE(#{condition}, `orderIntegral`)>0
+      OR LOCATE(#{condition2}, `orderUserName`)>0 )
     </if>
     AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
   </select>
@@ -234,7 +236,10 @@
     AND o.orderDate>='2018-02-24 14:08:30'  AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
   </select>
 
-
+  <!--每日定时清除无效订单  AND orderDate &lt; '2018-04-22 00:00:00'-->
+  <delete id="deleteInvalidOrder">
+    DELETE FROM UserOrder WHERE orderState = 0
+  </delete>
 
 
 

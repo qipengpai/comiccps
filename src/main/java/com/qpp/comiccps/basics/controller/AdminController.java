@@ -58,7 +58,7 @@ public class AdminController {
         Map<String,Object> map =new HashMap<>();
         map.put("userName",admin1.getUsername());
         map.put("isSystem",admin1.getIsSystem());
-        return new Model(map, JWTUtil.sign(admin1.getUsername(), MD5.getMd5(admin1.getPassword())));
+        return new Model(map, JWTUtil.sign(admin1.getUsername(), admin1.getPassword()));
     }
 
     /**

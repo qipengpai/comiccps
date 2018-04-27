@@ -92,17 +92,18 @@
   </update>
 
   <!--（条件）分页查询反馈列表-->
-  <select id="getAllFeedBack">
+  <select id="getAllFeedBack" resultType="com.qpp.comiccps.basics.entity.data.FeedBackData">
     SELECT
-    <include refid="Base_Column_List"/>
-    FROM FeedBack WHERE 1=1
+    f.id,f.content,f.backDate,f.userId ,e.userName
+    FROM FeedBack AS f,UserEntity AS e WHERE e.userId =f.userId
     <if test="condition != null">
-      AND ((userId LIKE CONCAT('%',#{condition},'%'))
-      OR (content LIKE CONCAT('%',#{condition},'%')))
+      AND (LOCATE(#{condition}, f.userId)>0
+      OR  LOCATE(#{condition}, f.content)>0
+      OR  LOCATE(#{condition2}, e.userName)>0)
     </if>
     <if test="startDate != null">
-    AND backDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    AND f.backDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
     </if>
-    ORDER BY backDate DESC
+    ORDER BY f.backDate DESC
   </select>
 </mapper>

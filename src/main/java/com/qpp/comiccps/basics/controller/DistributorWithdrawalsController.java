@@ -48,14 +48,6 @@ public class DistributorWithdrawalsController {
     @RequiresPermissions("withdrawals:select")
     public Model getDistributor(HttpServletRequest request, @RequestParam("withdrawalsState") String withdrawalsState, PageInfo pageInfo)
             throws Exception {
-        if (!DateUtil.checkLongDate(pageInfo.getStartDate(), pageInfo.getEndDate())) {
-            return new Model(500, "时间有误");
-        }else {
-            if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())) {
-                pageInfo.setStartDate(DateUtil.getYesterday());
-                pageInfo.setEndDate(DateUtil.getYesterday());
-            }
-        }
         //  分页查询分销商结算单列表
         String uid = (String) request.getSession().getAttribute("userInfo");
         Page<DistributorWithdrawals> list = distributorWithdrawalsService.selectDistributorWithdrawals(withdrawalsState,pageInfo,uid);

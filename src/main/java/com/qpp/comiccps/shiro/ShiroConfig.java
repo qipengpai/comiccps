@@ -45,7 +45,7 @@ public class ShiroConfig {
      */
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
-        ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();;
+        ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();
@@ -54,6 +54,7 @@ public class ShiroConfig {
 
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/403");
+        factoryBean.setUnauthorizedUrl("/401");
         /*
          * 自定义url规则
          * http://shiro.apache.org/web.html#urls-

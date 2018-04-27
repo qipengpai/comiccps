@@ -2,6 +2,8 @@ package com.qpp.comiccps.shiro;
 
 
 import com.qpp.comiccps.basics.entity.Admin;
+import com.qpp.comiccps.basics.entity.CpsRole;
+import com.qpp.comiccps.basics.entity.Menu;
 import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
 import com.qpp.comiccps.tool.JWTUtil;
 import org.apache.log4j.LogManager;
@@ -16,6 +18,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class MyRealm extends AuthorizingRealm {
@@ -70,13 +76,14 @@ public class MyRealm extends AuthorizingRealm {
         * @RequiresPermissions(value={“xxx:xxx”,”xxx:xxx”},logical=Logical.OR
         */
         String username = JWTUtil.getUsername(principals.toString());
-        Admin adminUser = adminServiceImpl.getCpsAdmin(username);
+        Admin adminUser = adminServiceImpl.getCpsAdminRoleMenu(username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-
-       // simpleAuthorizationInfo.addRole(user.getRole());
-      /*  Set<String> permission = new HashSet<String>(Arrays.asList(user.getPermission().split(",")));
-        simpleAuthorizationInfo.addStringPermissions(permission);*/
-       // simpleAuthorizationInfo.
+        for (CpsRole cpsRole:adminUser.getRoleList()) {
+            simpleAuthorizationInfo.addRole(cpsRole.getRoleDesc());
+            for (Menu menu:cpsRole.getMenuList()) {
+                simpleAuthorizationInfo.addStringPermission(menu.getMenuCode());
+            }
+        }
         return simpleAuthorizationInfo;
 }
 

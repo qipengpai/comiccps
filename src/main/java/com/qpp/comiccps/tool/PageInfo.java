@@ -25,6 +25,8 @@ public class PageInfo<T> implements Serializable {
 
     //条件
     private String condition;
+    //条件
+    private String condition2="";
     //开始时间
     private String startDate;
     //结束时间
@@ -147,6 +149,14 @@ public class PageInfo<T> implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getCondition2() {
+        return condition2;
+    }
+
+    public void setCondition2(String condition2) {
+        this.condition2 = condition2;
     }
 
     @Override

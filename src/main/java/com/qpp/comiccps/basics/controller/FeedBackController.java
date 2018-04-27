@@ -2,11 +2,13 @@ package com.qpp.comiccps.basics.controller;
 
 import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.FeedBack;
+import com.qpp.comiccps.basics.entity.data.FeedBackData;
 import com.qpp.comiccps.basics.service.impl.FeedBackServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
 import com.qpp.comiccps.tool.Model;
 import com.qpp.comiccps.tool.PageInfo;
 import com.qpp.comiccps.tool.ParaClick;
+import com.qpp.comiccps.tool.StringToInt;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -44,13 +46,16 @@ public class FeedBackController {
     @RequiresPermissions("feedBack:select")
     public Model getFeedBack(PageInfo pageInfo)
             throws Exception {
-        if (pageInfo.getPageNum()==0)
-            pageInfo.setPageNum(1);
         //  查询平台用户列表
-        Page<FeedBack> list = feedBackService.getAllFeedBack(pageInfo);
+        Page<FeedBackData> list = feedBackService.getAllFeedBack(pageInfo);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
-        PageInfo<FeedBack> pageInfos = new PageInfo<>(list);
+        for (FeedBackData feedBackData:list) {
+            if (!ParaClick.clickString(feedBackData.getUserName())) {
+                feedBackData.setUserName(StringToInt.toString(feedBackData.getUserName()));
+            }
+        }
+        PageInfo<FeedBackData> pageInfos = new PageInfo<>(list);
         return new Model(pageInfos);
     }
 

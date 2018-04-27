@@ -116,6 +116,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         }
     }
 
+
     /**
      * shiro认证perms资源失败后回调方法
      * @param servletRequest

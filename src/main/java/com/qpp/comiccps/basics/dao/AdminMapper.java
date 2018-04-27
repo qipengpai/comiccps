@@ -36,4 +36,7 @@ public interface AdminMapper {
 
     // 解除绑定前验证密码
     Admin getAdminByCheckUser(@Param("userType")String userType,@Param("password")String password);
+
+    // 获取角色权限
+    Admin getCpsAdminRoleMenu(@Param("username")String username);
 }

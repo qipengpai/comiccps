@@ -84,4 +84,16 @@ public class AdminServiceImpl {
     public Admin checkUser(String userType, String password) {
         return adminMapper.getAdminByCheckUser(userType,MD5.getMd5(password));
     }
+
+    /**
+     *    获取角色权限
+     *
+     * @author pengpai
+     * @date 2018/4/26 14:25
+     * @param username
+     * @return com.qpp.comiccps.basics.entity.Admin
+     */
+    public Admin getCpsAdminRoleMenu(String username) {
+        return adminMapper.getCpsAdminRoleMenu(username);
+    }
 }
