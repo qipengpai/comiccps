@@ -34,7 +34,8 @@ public class DistributorWithdrawalsServiceImpl {
      */
     public Page<DistributorWithdrawals> selectDistributorWithdrawals(String withdrawalsState,PageInfo pageInfo,String uid) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
-        return distributorWithdrawalsMapper.selectDistributorWithdrawals(withdrawalsState,pageInfo,uid);
+        return distributorWithdrawalsMapper.selectDistributorWithdrawals(withdrawalsState,pageInfo.getStartDate(),
+                pageInfo.getCondition(),pageInfo.getEndDate(),uid);
     }
 
     /**  

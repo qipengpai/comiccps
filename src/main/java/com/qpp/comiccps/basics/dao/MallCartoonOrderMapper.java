@@ -24,9 +24,20 @@ public interface MallCartoonOrderMapper {
     // （条件）分页查询咔咔豆订
     Page<MallCartoonOrderData> selectMallCartoonOrder(PageInfo pageInfo);
 
+    // （条件）分页查询咔咔豆订(count)
+    Double selectMallCartoonOrder_COUNT();
+
+    // （条件）分页查询咔咔豆订>2000
+    Page<MallCartoonOrderData> selectMallCartoonOrder2000(PageInfo pageInfo);
+
+    // （条件）分页查询咔咔豆订>2000(count)
+    Double selectMallCartoonOrder2000_COUNT();
+
     // 查询咔咔豆总和
     Double selectSumMallCartoonOrder(PageInfo pageInfo);
 
     //（条件）咔咔豆收益
     Page<MallCartoonOrderTotalData> selectMallCartoonOrderTotal(PageInfo pageInfo);
+
+
 }

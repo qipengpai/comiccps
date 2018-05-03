@@ -188,4 +188,26 @@ public class DateUtil {
 		}
 		return pageInfo;
 	}
+
+	/**
+	 *    检查时间 如果错误跑出异常 正确则判断是否为空 如果为空则赋值为null
+	 *
+	 * @author pengpai
+	 * @date 2018/5/3 17:33
+	 * @param pageInfo
+	 * @return com.qpp.comiccps.tool.PageInfo
+	 */
+	public static PageInfo checkPageInfo(PageInfo pageInfo) {
+		if (!checkLongDate(pageInfo.getStartDate(),pageInfo.getEndDate())) {
+			throw new BusinessException("时间错误");
+		}
+		if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())){
+			pageInfo.setStartDate(null);
+			pageInfo.setEndDate(null);
+		}
+		if (ParaClick.clickString(pageInfo.getCondition())){
+			pageInfo.setCondition(null);
+		}
+		return pageInfo;
+	}
 }

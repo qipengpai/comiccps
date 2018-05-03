@@ -46,5 +46,8 @@ public class ActionUrl {
 
     // 后台查询各公众号现金收益(新)
     public static final String SELECT_CARTOON_PROFIT_NEW = "/crxl/qpp/comicCps/select/cartoon/profit/new";
-
+    // 后台统计公众号粉丝分布
+    public static final String SELECT_USER_DISTRIBUTION_BYQD = "/crxl/qpp/comicCps/select/userEntityDistribution";
+    // 后台统计公众号粉丝性别
+    public static final String SELECT_USER_SEX = "/crxl/qpp/comicCps/select/userEntitySex";
 }

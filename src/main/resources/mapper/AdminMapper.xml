@@ -248,7 +248,7 @@
         SELECT
         <include refid="Custom_Column_List"/>
         FROM Admin
-        WHERE id=#{userType,jdbcType=VARCHAR}
+        WHERE uid=#{userType,jdbcType=VARCHAR}
         AND password = #{password,jdbcType=VARCHAR}
     </select>
 
@@ -257,5 +257,12 @@
       SELECT a.*,c.*,m.* FROM admin AS a,admin_role AS ar,cps_role AS c,menu AS m,role_menu AS rm
       WHERE a.uid=ar.admin_id AND ar.role_id = c.role_id AND c.role_id = rm.role_id AND m.menu_id = rm.menu_id
       AND a.username=#{username}
+    </select>
+
+    <!--根据用户名获取用户Id-->
+    <select id="getAdminByUserName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Custom_Column_List"/>
+        FROM  Admin WHERE username = #{authorization}
     </select>
 </mapper>

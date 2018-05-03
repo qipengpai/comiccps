@@ -44,7 +44,6 @@ public class DistributorController {
             @ApiImplicitParam(name = "pageSize", value = "每页的数量", required = true, dataType = "String", paramType = "query")
     })
     @PostMapping(value = ActionUrl.ADMIN_GET_ALL_DISTRIBUTOR)
-    @RequiresAuthentication
     @RequiresPermissions("distributor:select")
     public Model getDistributor(PageInfo pageInfo)
             throws Exception {
@@ -68,19 +67,18 @@ public class DistributorController {
     @ApiOperation("增加分销商并绑定CPS")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "账号", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "qd", value = "当前页", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "qd", value = "渠道", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "userpwd", value = "密碼", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "nickname", value = "用户姓名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "accountnum", value = "付款账号", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "accountname", value = "每页的数量", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "paytype", value = "用户支付类型", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "邮箱",  dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "accountnum", value = "付款账号",  dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "accountname", value = "每页的数量",  dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "paytype", value = "用户支付类型",  dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "proportion", value = "分成比例", required = true, dataType = "Double", paramType = "query"),
             @ApiImplicitParam(name = "usertype", value = "cps用戶Id", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.ADMIN_ADD_DISTRIBUTOR)
-    @RequiresAuthentication
     @RequiresPermissions("distributor:create")
     public Model addDistributor(DistributorData distributorData)
             throws Exception {
@@ -116,17 +114,16 @@ public class DistributorController {
             @ApiImplicitParam(name = "usertype", value = "cps用戶Id", dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.ADMIN_UPDATE_DISTRIBUTOR)
-    @RequiresAuthentication
     @RequiresPermissions("distributor:update")
     public Model updateDistributor(DistributorData distributorData)
             throws Exception {
-        if (!ParaClick.clickString(distributorData.getId()))
+        if (ParaClick.clickString(distributorData.getId()))
             return new Model(500, "ID为空");
         //  修改分销商
         int index = distributorService.updateDistributor(distributorData);
         if (index < 1)
-            return new Model(500, "增加失败");
-        return new Model(200, "增加成功");
+            return new Model(500, "修改失败");
+        return new Model(200, "修改成功");
     }
 
 
@@ -143,7 +140,6 @@ public class DistributorController {
             @ApiImplicitParam(name = "id", value = "id", dataType = "String", required = true, paramType = "query"),
     })
     @PostMapping(value = ActionUrl.ADMIN_GET_DISTRIBUTOR_BYID)
-    @RequiresAuthentication
     @RequiresPermissions("distributor:get")
     public Model updateDistributor(@RequestParam("id") String id)
             throws Exception {
@@ -171,15 +167,14 @@ public class DistributorController {
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", required = true, paramType = "query"),
     })
     @PostMapping(value = ActionUrl.BINDING_CPS_DISTRIBUTOR)
-    @RequiresAuthentication
     @RequiresPermissions("distributor:unbind")
     public Model unbindDistributor(@RequestParam("id") String id,
                                    @RequestParam("password") String password,
                                    @RequestParam("userType") String userType)
             throws Exception {
-        if (!ParaClick.clickString(id))
+        if (ParaClick.clickString(id))
             return new Model(500, "ID为空");
-        if (!ParaClick.clickString(password))
+        if (ParaClick.clickString(password))
             return new Model(500, "密码为空");
         Admin admin =adminService.checkUser(userType,password);
         if (admin == null)

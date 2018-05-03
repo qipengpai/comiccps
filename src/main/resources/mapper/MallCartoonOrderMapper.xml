@@ -129,24 +129,59 @@
 
     <!--  （条件）分页查询咔咔豆订-->
     <select id="selectMallCartoonOrder" resultType="com.qpp.comiccps.basics.entity.data.MallCartoonOrderData">
-        SELECT o.id,o.orderNum,u.userName,c.cartoonName,s.titile,o.orderMoney,o.orderDate
-        FROM MallCartoonOrder o,Cartoon c,CartoonSet s,UserEntity u
-        WHERE u.userId=o.userId AND o.cartoonId=c.id AND o.cartoonSetId=s.id AND o.orderState=1
-        <if test="condition != null">
-            AND u.userId LIKE CONCAT('%',#{condition},'%')
+        SELECT o.id,o.orderNum,u.userName,c.cartoonName,s.titile,o.orderMoney,o.orderDate FROM MallCartoonOrder o
+        LEFT JOIN Cartoon c ON c.id=o.cartoonId
+        LEFT JOIN CartoonSet s ON o.cartoonSetId=s.id
+        LEFT JOIN UserEntity u ON u.userId=o.userId WHERE 1=1
+        <if test="condition != null ">
+            AND  o.userId LIKE  CONCAT(#{condition},'%')
         </if>
         <if test="startDate != null ">
             AND o.orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
         </if>
         ORDER BY o.orderDate DESC
     </select>
+    <select id="selectMallCartoonOrder_COUNT" resultType="java.lang.Double">
+        SELECT count(0) FROM MallCartoonOrder WHERE 1=1
+        <if test="condition != null ">
+            AND  userId LIKE  CONCAT(#{condition},'%')
+        </if>
+        <if test="startDate != null ">
+            AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+    </select>
+
+    <!--  // （条件）分页查询咔咔豆订>2000-->
+    <select id="selectMallCartoonOrder2000" resultType="com.qpp.comiccps.basics.entity.data.MallCartoonOrderData">
+        SELECT o.id,o.orderNum,u.userName,c.cartoonName,s.titile,o.orderMoney,o.orderDate FROM MallCartoonOrder o
+        LEFT JOIN Cartoon c ON c.id=o.cartoonId
+        LEFT JOIN CartoonSet s ON o.cartoonSetId=s.id
+        LEFT JOIN UserEntity u ON u.userId=o.userId WHERE 1=1
+        <if test="condition != null ">
+            AND  o.userId LIKE  CONCAT(#{condition},'%')
+        </if>
+        <if test="startDate != null ">
+            AND o.orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+        ORDER BY o.id DESC
+    </select>
+    <select id="selectMallCartoonOrder2000_COUNT" resultType="java.lang.Double">
+        SELECT count(0) FROM MallCartoonOrder
+        <if test="condition != null ">
+            AND  userId LIKE  CONCAT(#{condition},'%')
+        </if>
+        <if test="startDate != null ">
+            AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+    </select>
+
 
     <!--查询咔咔豆总和-->
     <select id="selectSumMallCartoonOrder" resultType="java.lang.Double">
         SELECT SUM(orderMoney) FROM MallCartoonOrder
         WHERE orderState=1
         <if test="condition != null">
-            AND u.userId LIKE CONCAT('%',#{condition},'%')
+            AND INSTR(o.userId, #{condition} )>0
         </if>
         <if test="startDate">
             AND dw.withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)

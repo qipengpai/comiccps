@@ -1,13 +1,13 @@
 package com.qpp.comiccps.basics.controller;
 
 import com.github.pagehelper.Page;
+import com.qpp.comiccps.basics.entity.Admin;
 import com.qpp.comiccps.basics.entity.DistributorWithdrawals;
+import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
+import com.qpp.comiccps.basics.service.impl.DistributorServiceImpl;
 import com.qpp.comiccps.basics.service.impl.DistributorWithdrawalsServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
-import com.qpp.comiccps.tool.DateUtil;
-import com.qpp.comiccps.tool.Model;
-import com.qpp.comiccps.tool.PageInfo;
-import com.qpp.comiccps.tool.ParaClick;
+import com.qpp.comiccps.tool.*;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +25,9 @@ public class DistributorWithdrawalsController {
 
     @Autowired
     private DistributorWithdrawalsServiceImpl distributorWithdrawalsService;
+
+    @Autowired
+    private AdminServiceImpl adminService;
 
     /**
      *    （条件）分页查看分销商结算单
@@ -44,19 +47,30 @@ public class DistributorWithdrawalsController {
             @ApiImplicitParam(name = "withdrawalsState", value = "结算状态", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.DISTRIBUTOR_WITHDRAWALS_GET)
-    @RequiresAuthentication
     @RequiresPermissions("withdrawals:select")
     public Model getDistributor(HttpServletRequest request, @RequestParam("withdrawalsState") String withdrawalsState, PageInfo pageInfo)
             throws Exception {
+        PageInfo pageInfo1;
+        try{
+            pageInfo1= DateUtil.checkPageInfo(pageInfo);
+        }catch (RuntimeException e){
+            return new Model(500, "时间有误");
+        }
+        // 根据用户名获取用户Id
+        Admin admin =adminService.getAdminByUserName(JWTUtil.getUsername(request.getHeader("Authorization").toString()));
+        if (withdrawalsState.equals("2"))
+            withdrawalsState=null;
         //  分页查询分销商结算单列表
-        String uid = (String) request.getSession().getAttribute("userInfo");
-        Page<DistributorWithdrawals> list = distributorWithdrawalsService.selectDistributorWithdrawals(withdrawalsState,pageInfo,uid);
+        Page<DistributorWithdrawals> list = distributorWithdrawalsService.selectDistributorWithdrawals(withdrawalsState,pageInfo1,admin.getUid());
         if (!ParaClick.clickList(list))
-            return new Model(500, "查询失败");
+            return new Model(500, "暂无数据");
+        for (DistributorWithdrawals distributorWithdrawals:list) {
+            distributorWithdrawals.setWithdrawalsdate(distributorWithdrawals.getWithdrawalsdate().substring(0,distributorWithdrawals.getWithdrawalsdate().lastIndexOf(" ")));
+        }
         // 结算单求和
-        Double sum = distributorWithdrawalsService.selectSumDistributorWithdrawals(withdrawalsState,pageInfo,uid);
+        //Double sum = distributorWithdrawalsService.selectSumDistributorWithdrawals(withdrawalsState,pageInfo,admin.getUid());
         PageInfo<DistributorWithdrawals> pageInfos = new PageInfo<>(list);
-        return new Model(pageInfos,sum);
+        return new Model(pageInfos);
     }
 
 
@@ -76,9 +90,14 @@ public class DistributorWithdrawalsController {
     public Model finishDistributorWithdrawals(@RequestParam("id") String id)
             throws Exception {
         //  分页查询分销商列表
-        boolean flag= distributorWithdrawalsService.finishDistributorWithdrawals(id);
-        if (!flag)
+        try{
+            boolean flag= distributorWithdrawalsService.finishDistributorWithdrawals(id);
+            if (!flag)
+                return new Model(500,"结算失败");
+        }catch (RuntimeException e){
+            e.printStackTrace();
             return new Model(500,"结算失败");
+        }
         return new Model(200,"结算成功");
     }
 }

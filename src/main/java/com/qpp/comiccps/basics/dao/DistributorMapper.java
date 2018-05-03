@@ -1,6 +1,7 @@
 package com.qpp.comiccps.basics.dao;
 
 import com.github.pagehelper.Page;
+import com.qpp.comiccps.basics.entity.Admin;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.data.DistributorData;
 import com.qpp.comiccps.tool.PageInfo;
@@ -31,10 +32,12 @@ public interface DistributorMapper {
     int updateDistributor(DistributorData distributorData);
 
     // 解除绑定
-    int updateDistributorNull(@Param("id") String id);
+    int updateDistributorNull(@Param("id") String id,@Param("userType")String userType);
 
     // 增加已结算收益 并减少未结算收益
     int updateOverReCharge(@Param("overrecharge")Double overrecharge,
                            @Param("balance")Double balance,
                            @Param("id")String id);
+
+
 }

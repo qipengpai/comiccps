@@ -4,11 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qpp.comiccps.basics.dao.UserEntityMapper;
 import com.qpp.comiccps.basics.entity.UserEntity;
+import com.qpp.comiccps.basics.entity.data.AdminFansData;
 import com.qpp.comiccps.tool.PageInfo;
 import com.qpp.comiccps.tool.ParaClick;
 import com.qpp.comiccps.tool.StringToInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserEntityServiceImpl {
@@ -26,7 +29,7 @@ public class UserEntityServiceImpl {
      */
     public Page<UserEntity> getAllUserEntity(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-        if (pageInfo.getPageNum()>1000)
+        if (pageInfo.getPageNum()>2000)
             return userEntityMapper.getAllUserEntityBetter1000(pageInfo);
         return userEntityMapper.getAllUserEntity(pageInfo);
     }
@@ -42,5 +45,27 @@ public class UserEntityServiceImpl {
     public Page<UserEntity> getAllUserEntityByCondition(PageInfo pageInfo) {
         pageInfo.setCondition2(StringToInt.toInt(pageInfo.getCondition()));
         return userEntityMapper.getConditionUserEntity(pageInfo);
+    }
+
+    /**
+     *   公众号粉丝分布
+     *
+     * @author pengpai
+     * @date 2018/5/3 14:52
+     * @return java.util.List<com.qpp.comiccps.basics.entity.data.AdminFansData>
+     */
+    public List<AdminFansData> selectUserDistribution() {
+        return userEntityMapper.selectUserDistribution();
+    }
+
+    /**
+     *    公众号粉丝性別
+     *
+     * @author pengpai
+     * @date 2018/5/3 15:14
+     * @return java.util.List<com.qpp.comiccps.basics.entity.data.AdminFansData>
+     */
+    public List<AdminFansData> selectUserSex() {
+        return userEntityMapper.selectUserSex();
     }
 }

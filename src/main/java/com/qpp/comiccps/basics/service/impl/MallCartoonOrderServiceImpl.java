@@ -10,6 +10,8 @@ import com.qpp.comiccps.tool.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MallCartoonOrderServiceImpl {
 
@@ -27,6 +29,8 @@ public class MallCartoonOrderServiceImpl {
      */
     public Page<MallCartoonOrderData> selectMallCartoonOrder(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
+        if (pageInfo.getPageNum()>2000)
+            return mallCartoonOrderMapper.selectMallCartoonOrder2000(pageInfo);
         return mallCartoonOrderMapper.selectMallCartoonOrder(pageInfo);
     }
 
@@ -41,6 +45,8 @@ public class MallCartoonOrderServiceImpl {
     public Double selectSumMallCartoonOrder(PageInfo pageInfo) {
         return mallCartoonOrderMapper.selectSumMallCartoonOrder(pageInfo);
     }
+
+
 
     public Page<MallCartoonOrderTotalData> selectMallCartoonOrderTotal(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());

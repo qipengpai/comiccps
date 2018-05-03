@@ -39,4 +39,7 @@ public interface AdminMapper {
 
     // 获取角色权限
     Admin getCpsAdminRoleMenu(@Param("username")String username);
+
+    // 根据用户名获取用户Id
+    Admin getAdminByUserName(@Param("authorization")String authorization);
 }

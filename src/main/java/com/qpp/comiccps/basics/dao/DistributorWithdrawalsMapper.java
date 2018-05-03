@@ -21,9 +21,11 @@ public interface DistributorWithdrawalsMapper {
     int updateByPrimaryKey(DistributorWithdrawals record);
 
     // （条件）分页查看分销商结算单
-    Page<DistributorWithdrawals> selectDistributorWithdrawals(@Param("withdrawalsState") String withdrawalsState,
-                                                              PageInfo pageInfo,
-                                                              @Param("uid") String uid);
+    Page<DistributorWithdrawals> selectDistributorWithdrawals(@Param("withdrawalsState")String withdrawalsState,
+                                                              @Param("startDate")String startDate,
+                                                              @Param("condition")String condition,
+                                                              @Param("endDate")String endDate,
+                                                              @Param("uid")String uid);
 
 
     // 打款后完成订单
@@ -34,4 +36,5 @@ public interface DistributorWithdrawalsMapper {
     Double selectSumDistributorWithdrawals(@Param("withdrawalsState")String withdrawalsState,
                                            PageInfo pageInfo,
                                            @Param("uid") String uid);
+
 }

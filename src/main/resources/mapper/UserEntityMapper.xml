@@ -360,4 +360,15 @@
         ORDER BY userId DESC,vipId DESC
     </select>
 
+    <!--公众号粉丝分布-->
+    <select id="selectUserDistribution" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
+        SELECT platformIndex AS propertiesName,count(0) AS propertiesValue
+        FROM UserEntity GROUP BY platformIndex ORDER BY propertiesValue DESC
+    </select>
+
+    <!--公众号粉丝性別-->
+    <select id="selectUserSex" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
+        SELECT sex AS propertiesName,count(0) AS propertiesValue FROM UserEntity GROUP BY sex
+    </select>
+
 </mapper>

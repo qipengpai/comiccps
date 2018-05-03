@@ -43,7 +43,13 @@ public class UserOrderController {
     public Model getUserEntity(PageInfo pageInfo)
             throws Exception {
         //  查询平台用户列表
-        Page<UserOrder> list = userOrderService.getAllUserOrder(pageInfo);
+        PageInfo pageInfo1;
+        try{
+            pageInfo1=DateUtil.checkPageInfo(pageInfo);
+        }catch (RuntimeException e){
+            return new Model(500, "时间有误");
+        }
+        Page<UserOrder> list = userOrderService.getAllUserOrder(pageInfo1);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
         for (UserOrder userOrder:list) {
@@ -55,39 +61,5 @@ public class UserOrderController {
         PageInfo<UserOrder> pageInfos = new PageInfo<>(list);
         return new Model(pageInfos);
     }
-    /**
-     *    各個公衆號現金收益(新)
-     *
-     * @author pengpai
-     * @date 2018/4/25 17:48
-     * @param pageInfo
-     * @return com.qpp.comiccps.tool.Model
-     */
-    @ApiOperation("各個公衆號現金收益(新)")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "condition", value = "查詢條件",  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "pageNum", value = "当前页", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页的数量", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "startDate", value = "开始时间",  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "endDate", value = "结束时间", dataType = "String", paramType = "query")
-    })
-    @PostMapping(value = ActionUrl.SELECT_CARTOON_PROFIT_NEW)
-    //@RequiresPermissions("monetTotal:select")
-    public Model selectCartoonProfit(PageInfo pageInfo)
-            throws Exception {
-        if (!DateUtil.checkLongDate(pageInfo.getStartDate(), pageInfo.getEndDate()))
-            return new Model(500, "时间有误");
-        else
-            if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate()))
-                pageInfo.setStartDate(DateUtil.getdate_yyyy_MM_dd());
-                pageInfo.setEndDate(DateUtil.getdate_yyyy_MM_dd());
-        //  分页条件查询现金收益列表
-        Page<UserOrderProfitNew> list = userOrderService.selectOrderProfitNew(pageInfo);
-        if (!ParaClick.clickList(list))
-            return new Model(500, "查询失败");
-        // 查询现金收益
-        Double sum = userOrderService.selectOrderProfitNewSum(pageInfo);
-        PageInfo<UserOrderProfitNew> pageInfos = new PageInfo<>(list);
-        return new Model(pageInfos,sum);
-    }
+
 }

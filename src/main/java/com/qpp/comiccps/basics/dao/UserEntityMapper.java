@@ -2,8 +2,11 @@ package com.qpp.comiccps.basics.dao;
 
 import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.UserEntity;
+import com.qpp.comiccps.basics.entity.data.AdminFansData;
 import com.qpp.comiccps.tool.PageInfo;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserEntityMapper {
@@ -27,4 +30,10 @@ public interface UserEntityMapper {
 
     //分页查询用户列表>1000
     Page<UserEntity> getAllUserEntityBetter1000(PageInfo pageInfo);
+
+    //公众号粉丝分布
+    List<AdminFansData> selectUserDistribution();
+
+    //公众号粉丝性別
+    List<AdminFansData> selectUserSex();
 }

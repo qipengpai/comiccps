@@ -8,6 +8,8 @@ public class MallCartoonOrderData {
 
     private String userName;
 
+    private String cartoonName;
+
     private String titile;
 
     private String orderMoney;
@@ -60,5 +62,13 @@ public class MallCartoonOrderData {
 
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public String getCartoonName() {
+        return cartoonName;
+    }
+
+    public void setCartoonName(String cartoonName) {
+        this.cartoonName = cartoonName;
     }
 }

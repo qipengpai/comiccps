@@ -5,10 +5,7 @@ import com.qpp.comiccps.basics.entity.data.MallCartoonOrderData;
 import com.qpp.comiccps.basics.entity.data.MallCartoonOrderTotalData;
 import com.qpp.comiccps.basics.service.impl.MallCartoonOrderServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
-import com.qpp.comiccps.tool.DateUtil;
-import com.qpp.comiccps.tool.Model;
-import com.qpp.comiccps.tool.PageInfo;
-import com.qpp.comiccps.tool.ParaClick;
+import com.qpp.comiccps.tool.*;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +14,8 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class MallCartoonOrderController {
@@ -46,7 +45,7 @@ public class MallCartoonOrderController {
             throws Exception {
         PageInfo pageInfo1;
         try{
-            pageInfo1=DateUtil.checkYesterdayTime(pageInfo);
+            pageInfo1=DateUtil.checkPageInfo(pageInfo);
         }catch (RuntimeException e){
             return new Model(500, "时间有误");
         }
@@ -54,10 +53,14 @@ public class MallCartoonOrderController {
         Page<MallCartoonOrderData> list = mallCartoonOrderService.selectMallCartoonOrder(pageInfo1);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
+        for (MallCartoonOrderData mallCartoonOrderData:list) {
+            if (!ParaClick.clickString(mallCartoonOrderData.getUserName()))
+                mallCartoonOrderData.setUserName(StringToInt.toString(mallCartoonOrderData.getUserName()));
+        }
         // 查询咔咔豆总和
-        Double sum = mallCartoonOrderService.selectSumMallCartoonOrder(pageInfo);
+        // Double sum = mallCartoonOrderService.selectSumMallCartoonOrder(pageInfo);
         PageInfo<MallCartoonOrderData> pageInfos = new PageInfo<>(list);
-        return new Model(pageInfos, sum);
+        return new Model(pageInfos);
     }
 
     @ApiOperation("（条件）咔咔豆收益")

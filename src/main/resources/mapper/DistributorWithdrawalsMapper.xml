@@ -163,7 +163,7 @@
       AND d.userType=#{uid,jdbcType=VARCHAR}
     </if>
     <if test="withdrawalsState != null">
-      AND dw.withdrawalsState= #{withdrawalsstate}
+      AND dw.withdrawalsState= #{withdrawalsState}
     </if>
     <if test="condition != null">
       AND ( LOCATE(#{condition},dw.distridutionId)>0
@@ -194,7 +194,7 @@
       AND dw.withdrawalsState= #{withdrawalsstate}
     </if>
     <if test="condition != null">
-      AND ((dw.distridutionId LIKE CONCAT('%',#{condition},'%'))OR(remarks LIKE CONCAT('%',#{condition},'%'))
+      AND (INSTR (#{condition},dw.distridutionId) OR (INSTR (#{condition},dw.remarks))
     </if>
     <if test="startDate != null">
       AND dw.withdrawalsDate  BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)

@@ -96,4 +96,16 @@ public class AdminServiceImpl {
     public Admin getCpsAdminRoleMenu(String username) {
         return adminMapper.getCpsAdminRoleMenu(username);
     }
+
+    /**
+     *    根据用户名获取用户Id
+     *
+     * @author pengpai
+     * @date 2018/4/28 11:39
+     * @param authorization
+     * @return com.qpp.comiccps.basics.entity.Admin
+     */
+    public Admin getAdminByUserName(String authorization) {
+        return adminMapper.getAdminByUserName(authorization);
+    }
 }

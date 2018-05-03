@@ -3,6 +3,7 @@ package com.qpp.comiccps.basics.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qpp.comiccps.basics.dao.DistributorMapper;
+import com.qpp.comiccps.basics.entity.Admin;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.data.DistributorData;
 import com.qpp.comiccps.tool.DateUtil;
@@ -85,6 +86,8 @@ public class DistributorServiceImpl {
      * @return int
      */
     public int updateDistributorNull(String id) {
-        return distributorMapper.updateDistributorNull(id);
+        return distributorMapper.updateDistributorNull(id,null);
     }
+
+
 }

@@ -5,10 +5,7 @@ import com.qpp.comiccps.basics.entity.FeedBack;
 import com.qpp.comiccps.basics.entity.data.FeedBackData;
 import com.qpp.comiccps.basics.service.impl.FeedBackServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
-import com.qpp.comiccps.tool.Model;
-import com.qpp.comiccps.tool.PageInfo;
-import com.qpp.comiccps.tool.ParaClick;
-import com.qpp.comiccps.tool.StringToInt;
+import com.qpp.comiccps.tool.*;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -46,8 +43,14 @@ public class FeedBackController {
     @RequiresPermissions("feedBack:select")
     public Model getFeedBack(PageInfo pageInfo)
             throws Exception {
+        PageInfo pageInfo1;
+        try{
+            pageInfo1= DateUtil.checkPageInfo(pageInfo);
+        }catch (RuntimeException e){
+            return new Model(500, "时间有误");
+        }
         //  查询平台用户列表
-        Page<FeedBackData> list = feedBackService.getAllFeedBack(pageInfo);
+        Page<FeedBackData> list = feedBackService.getAllFeedBack(pageInfo1);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
         for (FeedBackData feedBackData:list) {

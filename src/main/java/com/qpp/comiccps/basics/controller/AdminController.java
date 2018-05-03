@@ -41,7 +41,7 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.CPS_ADMIN_LOGIN)
-    public Model userRegisterSend(HttpServletRequest request, Admin admin)
+    public Model userRegisterSend(Admin admin)
             throws Exception {
         if (ParaClick.clickString(admin.getUsername()))
             return new Model(500, "请输入账号");
@@ -53,8 +53,6 @@ public class AdminController {
         if (admin1 == null)
             return new Model(500, "用户名或密码错误");
         //System.out.println(JWTUtil.sign(distributor.getUsername(), MD5.getMd5(distributor.getUserpwd())));
-        request.getSession().setAttribute("userInfo", admin1.getUid());
-        request.getSession().setMaxInactiveInterval(1800);
         Map<String,Object> map =new HashMap<>();
         map.put("userName",admin1.getUsername());
         map.put("isSystem",admin1.getIsSystem());

@@ -6,6 +6,7 @@ import com.qpp.comiccps.basics.entity.CpsRole;
 import com.qpp.comiccps.basics.entity.Menu;
 import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
 import com.qpp.comiccps.tool.JWTUtil;
+import com.qpp.comiccps.tool.ParaClick;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
@@ -78,10 +79,12 @@ public class MyRealm extends AuthorizingRealm {
         String username = JWTUtil.getUsername(principals.toString());
         Admin adminUser = adminServiceImpl.getCpsAdminRoleMenu(username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for (CpsRole cpsRole:adminUser.getRoleList()) {
-            simpleAuthorizationInfo.addRole(cpsRole.getRoleDesc());
-            for (Menu menu:cpsRole.getMenuList()) {
-                simpleAuthorizationInfo.addStringPermission(menu.getMenuCode());
+        if (ParaClick.clickList(adminUser.getRoleList())) {
+            for (CpsRole cpsRole : adminUser.getRoleList()) {
+                simpleAuthorizationInfo.addRole(cpsRole.getRoleDesc());
+                for (Menu menu : cpsRole.getMenuList()) {
+                    simpleAuthorizationInfo.addStringPermission(menu.getMenuCode());
+                }
             }
         }
         return simpleAuthorizationInfo;
