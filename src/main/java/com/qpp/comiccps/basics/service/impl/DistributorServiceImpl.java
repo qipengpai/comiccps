@@ -48,7 +48,7 @@ public class DistributorServiceImpl {
         distributorData.setImpldate(DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
         distributorData.setLastlogindate(DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
         distributorData.setQd(distributorData.getQd().toUpperCase());
-        distributorData.setUserpwd(MD5.getMd5(distributorData.getUserpwd()));
+        distributorData.setUserpwd(MD5.getMd5(distributorData.getUserpwd().trim()));
         return distributorMapper.addDistributor(distributorData);
     }
 
@@ -90,4 +90,15 @@ public class DistributorServiceImpl {
     }
 
 
+    /**
+     *    修改分销商状态为下架
+     *
+     * @author pengpai
+     * @date 2018/5/4 11:02
+     * @param id
+     * @return int
+     */
+    public int updateDistributorState(String id) {
+        return distributorMapper.updateDistributorState(id,0);
+    }
 }

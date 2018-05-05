@@ -35,4 +35,18 @@ public interface UserOrderMapper {
 
     // 每日定时清除无效订单
     int deleteInvalidOrder();
+
+    // 查询总订单数量
+    int getAllPayNum(@Param("sentry1") String sentry1,@Param("sentry2") String sentry2);
+
+    // 查询总付费人数
+    int getAllPayPersonNum(@Param("sentry1") String sentry1,@Param("sentry2") String sentry2);
+
+    //查询总付费金额
+    int getAllPaySum(@Param("sentry1") String sentry1,@Param("sentry2") String sentry2);
+
+    // 查询 昨日/今日 新增vip数量
+    int getVipUserAddNum(@Param("sentry1") String sentry1,@Param("sentry2") String sentry2);
+
+
 }

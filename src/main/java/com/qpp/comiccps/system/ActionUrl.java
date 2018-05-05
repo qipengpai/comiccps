@@ -26,6 +26,8 @@ public class ActionUrl {
     public static final String ADMIN_ADD_DISTRIBUTOR="/crxl/qpp/comicCps/addDistributor";
     // 修改分销商
     public static final String ADMIN_UPDATE_DISTRIBUTOR="/crxl/qpp/comicCps/updateDistributor";
+    // 修改分销商状态为下架状态
+    public static final String ADMIN_UPDATE_DISTRIBUTOR_STATE="/crxl/qpp/comicCps/updateDistributorState";
     // 根据id查询分销商
     public static final String ADMIN_GET_DISTRIBUTOR_BYID="/crxl/qpp/comicCps/getDistributorId";
     // 解除绑定Cps用户与分销商
@@ -50,4 +52,11 @@ public class ActionUrl {
     public static final String SELECT_USER_DISTRIBUTION_BYQD = "/crxl/qpp/comicCps/select/userEntityDistribution";
     // 后台统计公众号粉丝性别
     public static final String SELECT_USER_SEX = "/crxl/qpp/comicCps/select/userEntitySex";
+    // 后台统计所有数据
+    public static final String SELECT_DATA_STATISTICS = "/crxl/qpp/comicCps/select/dataStatisticsE";
+    // 后台查看歷史每日统计数据
+    public static final String SELECT_DATA_STATISTICS_EVERYDAY = "/crxl/qpp/comicCps/select/dataStatisticsEveryDay";
+    // 后台查看数据趋势统计
+    public static final String SELECT_DATA_TRENDMAP = "/crxl/qpp/comicCps/select/dataTrendMap";
+
 }

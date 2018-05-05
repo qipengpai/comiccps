@@ -1,7 +1,10 @@
 package com.qpp.comiccps.basics.service.impl;
 
 import com.qpp.comiccps.basics.dao.AdminMapper;
+import com.qpp.comiccps.basics.dao.AdminRoleMapper;
 import com.qpp.comiccps.basics.entity.Admin;
+import com.qpp.comiccps.basics.entity.AdminRoleKey;
+import com.qpp.comiccps.exception.BusinessException;
 import com.qpp.comiccps.tool.DateUtil;
 import com.qpp.comiccps.tool.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,8 @@ public class AdminServiceImpl {
 
     @Autowired
     private AdminMapper adminMapper;
-
+    @Autowired
+    private AdminRoleMapper adminRoleMapper;
     /**
      *    cps 用户登录
      *
@@ -55,11 +59,35 @@ public class AdminServiceImpl {
      * @return boolean
      */
     public boolean createCpsAdmin(Admin admin) {
-        String password= MD5.getMd5(admin.getPassword());
-        int index =adminMapper.createCpsAdmin(admin.getUsername(),password,1, DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
-        if (index<1)
-            return false;
-        return true;
+        boolean flag=false;
+        try {
+            String password = MD5.getMd5(admin.getPassword());
+            //创建cps用户
+            Admin admin1=new Admin();
+            admin1.setUsername(admin.getUsername());
+            admin1.setPassword(password);
+            admin1.setIsSystem("yunying");
+            admin1.setSalt(password);
+            admin1.setState(1);
+            admin1.setUpdatedAt(DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
+            admin1.setCreatedAt(DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
+            //int index =adminMapper.createCpsAdmin(admin.getUsername(),password,1, DateUtil.getdate_yyyy_MM_dd_HH_MM_SS());
+            int index=adminMapper.insertSelective(admin1);
+            if (index<1)
+                return flag;
+            System.out.println("-------------"+admin1.getUid()+"----------");
+            AdminRoleKey adminRole=new AdminRoleKey();
+            adminRole.setAdminId(admin1.getUid());
+            adminRole.setRoleId("29aafd8ab08c4078bec439c8d9fb7e04");
+            int index1 =adminRoleMapper.insert(adminRole);
+            if (index1<1)
+                return flag;
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BusinessException("异常");
+        }
+        return flag;
     }
     /**
      *    查询所有CPS用户

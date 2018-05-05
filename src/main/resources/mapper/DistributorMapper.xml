@@ -283,7 +283,7 @@
       AND (LOCATE(#{condition},nickName)>0
       OR LOCATE(#{condition},phone)>0)
     </if>
-    ORDER BY allRecharge DESC
+    ORDER BY allRecharge DESC,implDate ASC
   </select>
 
   <!--增加分销商并绑定CPS-->
@@ -501,4 +501,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <!--修改分销商状态为下架-->
+  <update id="updateDistributorState">
+    update distributor
+    <set>
+      state = #{state,jdbcType=INTEGER}
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

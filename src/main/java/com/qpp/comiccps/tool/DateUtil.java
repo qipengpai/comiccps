@@ -210,4 +210,20 @@ public class DateUtil {
 		}
 		return pageInfo;
 	}
+
+	public static PageInfo checkDateByTrendMap(PageInfo pageInfo) {
+		if (!checkLongDate(pageInfo.getStartDate(),pageInfo.getEndDate())) {
+			throw new BusinessException("时间错误");
+		}
+		if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())){
+			// 获取昨天的日期
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -7);
+			String thatDay = new SimpleDateFormat("yyyy-MM-dd").format(cal
+					.getTime());
+			pageInfo.setStartDate(thatDay);
+			pageInfo.setEndDate(getdate_yyyy_MM_dd());
+		}
+		return pageInfo;
+	}
 }

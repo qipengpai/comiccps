@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.DailyDataStatisticsMapper">
+    <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DailyDataStatistics">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="dailyVisterNum" jdbcType="INTEGER" property="dailyvisternum"/>
+        <result column="dailyVisterAddNum" jdbcType="INTEGER" property="dailyvisteraddnum"/>
+        <result column="svipUserAddNum" jdbcType="INTEGER" property="svipuseraddnum"/>
+        <result column="vipUserAddNum" jdbcType="INTEGER" property="vipuseraddnum"/>
+        <result column="payNum" jdbcType="INTEGER" property="paynum"/>
+        <result column="payPersonNum" jdbcType="INTEGER" property="paypersonnum"/>
+        <result column="arppu" jdbcType="DOUBLE" property="arppu"/>
+        <result column="arpu" jdbcType="DOUBLE" property="arpu"/>
+        <result column="aru" jdbcType="DOUBLE" property="aru"/>
+        <result column="implDate" jdbcType="VARCHAR" property="impldate"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="beanIncome" jdbcType="INTEGER" property="beanincome"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, uuid, dailyVisterNum, dailyVisterAddNum, svipUserAddNum, vipUserAddNum, payNum, 
+    payPersonNum, arppu, arpu, aru, implDate, state, beanIncome
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dailydatastatistics
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dailydatastatistics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DailyDataStatistics">
+    insert into dailydatastatistics (id, uuid, dailyVisterNum, 
+      dailyVisterAddNum, svipUserAddNum, vipUserAddNum, 
+      payNum, payPersonNum, arppu, 
+      arpu, aru, implDate, 
+      state, beanIncome)
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{dailyvisternum,jdbcType=INTEGER}, 
+      #{dailyvisteraddnum,jdbcType=INTEGER}, #{svipuseraddnum,jdbcType=INTEGER}, #{vipuseraddnum,jdbcType=INTEGER}, 
+      #{paynum,jdbcType=INTEGER}, #{paypersonnum,jdbcType=INTEGER}, #{arppu,jdbcType=DOUBLE}, 
+      #{arpu,jdbcType=DOUBLE}, #{aru,jdbcType=DOUBLE}, #{impldate,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{beanincome,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DailyDataStatistics">
+        insert into dailydatastatistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="dailyvisternum != null">
+                dailyVisterNum,
+            </if>
+            <if test="dailyvisteraddnum != null">
+                dailyVisterAddNum,
+            </if>
+            <if test="svipuseraddnum != null">
+                svipUserAddNum,
+            </if>
+            <if test="vipuseraddnum != null">
+                vipUserAddNum,
+            </if>
+            <if test="paynum != null">
+                payNum,
+            </if>
+            <if test="paypersonnum != null">
+                payPersonNum,
+            </if>
+            <if test="arppu != null">
+                arppu,
+            </if>
+            <if test="arpu != null">
+                arpu,
+            </if>
+            <if test="aru != null">
+                aru,
+            </if>
+            <if test="impldate != null">
+                implDate,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="beanincome != null">
+                beanIncome,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="dailyvisternum != null">
+                #{dailyvisternum,jdbcType=INTEGER},
+            </if>
+            <if test="dailyvisteraddnum != null">
+                #{dailyvisteraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="svipuseraddnum != null">
+                #{svipuseraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="vipuseraddnum != null">
+                #{vipuseraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="paynum != null">
+                #{paynum,jdbcType=INTEGER},
+            </if>
+            <if test="paypersonnum != null">
+                #{paypersonnum,jdbcType=INTEGER},
+            </if>
+            <if test="arppu != null">
+                #{arppu,jdbcType=DOUBLE},
+            </if>
+            <if test="arpu != null">
+                #{arpu,jdbcType=DOUBLE},
+            </if>
+            <if test="aru != null">
+                #{aru,jdbcType=DOUBLE},
+            </if>
+            <if test="impldate != null">
+                #{impldate,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="beanincome != null">
+                #{beanincome,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DailyDataStatistics">
+        update dailydatastatistics
+        <set>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="dailyvisternum != null">
+                dailyVisterNum = #{dailyvisternum,jdbcType=INTEGER},
+            </if>
+            <if test="dailyvisteraddnum != null">
+                dailyVisterAddNum = #{dailyvisteraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="svipuseraddnum != null">
+                svipUserAddNum = #{svipuseraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="vipuseraddnum != null">
+                vipUserAddNum = #{vipuseraddnum,jdbcType=INTEGER},
+            </if>
+            <if test="paynum != null">
+                payNum = #{paynum,jdbcType=INTEGER},
+            </if>
+            <if test="paypersonnum != null">
+                payPersonNum = #{paypersonnum,jdbcType=INTEGER},
+            </if>
+            <if test="arppu != null">
+                arppu = #{arppu,jdbcType=DOUBLE},
+            </if>
+            <if test="arpu != null">
+                arpu = #{arpu,jdbcType=DOUBLE},
+            </if>
+            <if test="aru != null">
+                aru = #{aru,jdbcType=DOUBLE},
+            </if>
+            <if test="impldate != null">
+                implDate = #{impldate,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="beanincome != null">
+                beanIncome = #{beanincome,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DailyDataStatistics">
+    update dailydatastatistics
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      dailyVisterNum = #{dailyvisternum,jdbcType=INTEGER},
+      dailyVisterAddNum = #{dailyvisteraddnum,jdbcType=INTEGER},
+      svipUserAddNum = #{svipuseraddnum,jdbcType=INTEGER},
+      vipUserAddNum = #{vipuseraddnum,jdbcType=INTEGER},
+      payNum = #{paynum,jdbcType=INTEGER},
+      payPersonNum = #{paypersonnum,jdbcType=INTEGER},
+      arppu = #{arppu,jdbcType=DOUBLE},
+      arpu = #{arpu,jdbcType=DOUBLE},
+      aru = #{aru,jdbcType=DOUBLE},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      beanIncome = #{beanincome,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--后台查看歷史每日统计数据-->
+    <select id="selectDataStatisticsEveryDay" resultMap="BaseResultMap">
+    SELECT * FROM DailyDataStatistics ORDER BY implDate DESC
+    </select>
+
+    <!--判斷今天是否生成-->
+    <select id="getAllIfExists" resultMap="BaseResultMap">
+     SELECT * FROM DailyDataStatistics WHERE implDate = #{implDate,jdbcType=VARCHAR}
+    </select>
+
+    <!--(钱收入)数据趋势统计-->
+    <select id="selectDataTrendMapByMoneySum" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
+      SELECT DISTINCT c.datelist AS propertiesName,IF(d.dailyvisteraddnum IS NULL , 0, d.dailyvisteraddnum)
+        AS propertiesValue FROM DailyDataStatistics AS d
+        RIGHT JOIN Calendar as c ON d.implDate = c.datelist
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+    </select>
+
+    <!--(豆收入)数据趋势统计-->
+    <select id="selectDataTrendMapByBeanSum" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
+      SELECT DISTINCT c.datelist AS propertiesName,IF(d.beanIncome IS NULL , 0, d.beanIncome)
+        AS propertiesValue FROM DailyDataStatistics AS d
+        RIGHT JOIN Calendar as c ON d.implDate = c.datelist
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+    </select>
+
+    <!--(日訪問量)数据趋势统计-->
+    <select id="selectDataTrendMapByVisterSum" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
+      SELECT DISTINCT c.datelist AS propertiesName,IF(d.dailyvisternum IS NULL , 0, d.dailyvisternum)
+        AS propertiesValue FROM DailyDataStatistics AS d
+        RIGHT JOIN Calendar as c ON d.implDate = c.datelist
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+    </select>
+</mapper>

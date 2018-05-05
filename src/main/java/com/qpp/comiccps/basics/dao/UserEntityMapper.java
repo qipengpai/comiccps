@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.UserEntity;
 import com.qpp.comiccps.basics.entity.data.AdminFansData;
 import com.qpp.comiccps.tool.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,4 +37,14 @@ public interface UserEntityMapper {
 
     //公众号粉丝性別
     List<AdminFansData> selectUserSex();
+
+    //总用户数
+    int getUserEntityTotalCount(@Param("sentry1") String sentry1, @Param("sentry2") String sentry2);
+
+    //查询Svip数量
+    int getSvipUserNum(@Param("sentry1") String sentry1, @Param("sentry2") String sentry2);
+
+    //查询vip数量
+    int getVipUserNum();
+
 }

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qpp.comiccps.basics.dao.DataStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DataStatistics">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="visterNum" jdbcType="INTEGER" property="visternum" />
+    <result column="dailyVisterAddNum" jdbcType="INTEGER" property="dailyvisteraddnum" />
+    <result column="svipUserAddNum" jdbcType="INTEGER" property="svipuseraddnum" />
+    <result column="vipUserAddNum" jdbcType="INTEGER" property="vipuseraddnum" />
+    <result column="payNum" jdbcType="INTEGER" property="paynum" />
+    <result column="payPersonNum" jdbcType="INTEGER" property="paypersonnum" />
+    <result column="arppu" jdbcType="DOUBLE" property="arppu" />
+    <result column="arpu" jdbcType="DOUBLE" property="arpu" />
+    <result column="aru" jdbcType="DOUBLE" property="aru" />
+    <result column="implDate" jdbcType="VARCHAR" property="impldate" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="beanIncome" jdbcType="INTEGER" property="beanincome" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, visterNum, dailyVisterAddNum, svipUserAddNum, vipUserAddNum, payNum, payPersonNum, 
+    arppu, arpu, aru, implDate, state, beanIncome
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from datastatistics
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from datastatistics
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DataStatistics">
+    insert into datastatistics (id, visterNum, dailyVisterAddNum, 
+      svipUserAddNum, vipUserAddNum, payNum, 
+      payPersonNum, arppu, arpu, 
+      aru, implDate, state, 
+      beanIncome)
+    values (#{id,jdbcType=VARCHAR}, #{visternum,jdbcType=INTEGER}, #{dailyvisteraddnum,jdbcType=INTEGER}, 
+      #{svipuseraddnum,jdbcType=INTEGER}, #{vipuseraddnum,jdbcType=INTEGER}, #{paynum,jdbcType=INTEGER}, 
+      #{paypersonnum,jdbcType=INTEGER}, #{arppu,jdbcType=DOUBLE}, #{arpu,jdbcType=DOUBLE}, 
+      #{aru,jdbcType=DOUBLE}, #{impldate,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{beanincome,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DataStatistics">
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
+    insert into datastatistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="visternum != null">
+        visterNum,
+      </if>
+      <if test="dailyvisteraddnum != null">
+        dailyVisterAddNum,
+      </if>
+      <if test="svipuseraddnum != null">
+        svipUserAddNum,
+      </if>
+      <if test="vipuseraddnum != null">
+        vipUserAddNum,
+      </if>
+      <if test="paynum != null">
+        payNum,
+      </if>
+      <if test="paypersonnum != null">
+        payPersonNum,
+      </if>
+      <if test="arppu != null">
+        arppu,
+      </if>
+      <if test="arpu != null">
+        arpu,
+      </if>
+      <if test="aru != null">
+        aru,
+      </if>
+      <if test="impldate != null">
+        implDate,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="beanincome != null">
+        beanIncome,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="visternum != null">
+        #{visternum,jdbcType=INTEGER},
+      </if>
+      <if test="dailyvisteraddnum != null">
+        #{dailyvisteraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="svipuseraddnum != null">
+        #{svipuseraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="vipuseraddnum != null">
+        #{vipuseraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="paynum != null">
+        #{paynum,jdbcType=INTEGER},
+      </if>
+      <if test="paypersonnum != null">
+        #{paypersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="arppu != null">
+        #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="arpu != null">
+        #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="aru != null">
+        #{aru,jdbcType=DOUBLE},
+      </if>
+      <if test="impldate != null">
+        #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beanincome != null">
+        #{beanincome,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DataStatistics">
+    update datastatistics
+    <set>
+      <if test="visternum != null">
+        visterNum = #{visternum,jdbcType=INTEGER},
+      </if>
+      <if test="dailyvisteraddnum != null">
+        dailyVisterAddNum = #{dailyvisteraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="svipuseraddnum != null">
+        svipUserAddNum = #{svipuseraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="vipuseraddnum != null">
+        vipUserAddNum = #{vipuseraddnum,jdbcType=INTEGER},
+      </if>
+      <if test="paynum != null">
+        payNum = #{paynum,jdbcType=INTEGER},
+      </if>
+      <if test="paypersonnum != null">
+        payPersonNum = #{paypersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="arppu != null">
+        arppu = #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="arpu != null">
+        arpu = #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="aru != null">
+        aru = #{aru,jdbcType=DOUBLE},
+      </if>
+      <if test="impldate != null">
+        implDate = #{impldate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beanincome != null">
+        beanIncome = #{beanincome,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DataStatistics">
+    update datastatistics
+    set visterNum = #{visternum,jdbcType=INTEGER},
+      dailyVisterAddNum = #{dailyvisteraddnum,jdbcType=INTEGER},
+      svipUserAddNum = #{svipuseraddnum,jdbcType=INTEGER},
+      vipUserAddNum = #{vipuseraddnum,jdbcType=INTEGER},
+      payNum = #{paynum,jdbcType=INTEGER},
+      payPersonNum = #{paypersonnum,jdbcType=INTEGER},
+      arppu = #{arppu,jdbcType=DOUBLE},
+      arpu = #{arpu,jdbcType=DOUBLE},
+      aru = #{aru,jdbcType=DOUBLE},
+      implDate = #{impldate,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      beanIncome = #{beanincome,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

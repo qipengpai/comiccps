@@ -2,6 +2,7 @@ package com.qpp.comiccps.basics.controller;
 
 import com.qpp.comiccps.basics.entity.Admin;
 import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
+import com.qpp.comiccps.exception.BusinessException;
 import com.qpp.comiccps.system.ActionUrl;
 import com.qpp.comiccps.tool.JWTUtil;
 import com.qpp.comiccps.tool.MD5;
@@ -53,19 +54,19 @@ public class AdminController {
         if (admin1 == null)
             return new Model(500, "用户名或密码错误");
         //System.out.println(JWTUtil.sign(distributor.getUsername(), MD5.getMd5(distributor.getUserpwd())));
-        Map<String,Object> map =new HashMap<>();
-        map.put("userName",admin1.getUsername());
-        map.put("isSystem",admin1.getIsSystem());
+        Map<String, Object> map = new HashMap<>();
+        map.put("userName", admin1.getUsername());
+        map.put("isSystem", admin1.getIsSystem());
         return new Model(map, JWTUtil.sign(admin1.getUsername(), admin1.getPassword()));
     }
 
     /**
-     *    创建Cps用户
+     * 创建Cps用户
      *
-     * @author pengpai
-     * @date 2018/4/21 11:14
      * @param admin
      * @return com.qpp.comiccps.tool.Model
+     * @author pengpai
+     * @date 2018/4/21 11:14
      */
     @ApiOperation("CPS创建用户")
     @ApiImplicitParams({
@@ -73,15 +74,21 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
     })
     @PostMapping(value = ActionUrl.CPS_CREATE_ADMIN)
-    @RequiresAuthentication
-    @RequiresPermissions("admin:create")
+    // @RequiresPermissions("admin:create")
     public Model createCpsAdmin(Admin admin)
             throws Exception {
         if (ParaClick.clickString(admin.getUsername()))
             return new Model(500, "请输入账号");
         if (ParaClick.clickString(admin.getPassword()))
             return new Model(500, "请输入密码");
-        //  登录
+        List<Admin> adminList = adminServiceImpl.getAllCpsAdmin();
+        for (Admin admin1 : adminList) {
+            if (admin1.getUsername().equals(admin.getUsername())) {
+                return new Model(500, "用户名已存在");
+            }
+        }
+
+        //  创建CPS
         boolean flag = adminServiceImpl
                 .createCpsAdmin(admin);
         if (!flag)
@@ -90,11 +97,11 @@ public class AdminController {
     }
 
     /**
-     *    查询所有CPS用户
+     * 查询所有CPS用户
      *
+     * @return com.qpp.comiccps.tool.Model
      * @author pengpai
      * @date 2018/4/23 17:10
-     * @return com.qpp.comiccps.tool.Model
      */
     @ApiOperation("查询所有CPS用户")
     @PostMapping(value = ActionUrl.GET_ALL_CPS_ADMIN)

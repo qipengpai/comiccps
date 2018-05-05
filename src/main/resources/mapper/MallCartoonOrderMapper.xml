@@ -192,4 +192,15 @@
     <select id="selectMallCartoonOrderTotal" resultType="com.qpp.comiccps.basics.entity.data.MallCartoonOrderTotalData">
         SELECT * FROM  MallCartoonOrder
     </select>
+
+    <!--查询咔咔豆总和-->
+    <select id="getBeanSum" resultType="java.lang.Integer">
+        SELECT IFNULL(SUM(orderMoney),0) FROM MallCartoonOrder WHERE orderState=1
+        <if test="sentry1 != null">
+            AND to_days(orderDate) = to_days(now())
+        </if>
+        <if test="sentry2 != null">
+            AND to_days(now()) - to_days(orderDate) = 1
+        </if>
+    </select>
 </mapper>

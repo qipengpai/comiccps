@@ -83,6 +83,18 @@ public class DistributorController {
     public Model addDistributor(DistributorData distributorData)
             throws Exception {
         //  增加分销商
+        if (ParaClick.clickString(distributorData.getUsername())) {
+            return new Model(500, "请输入用户名");
+        }
+        if (ParaClick.clickString(distributorData.getUserpwd().trim())) {
+            return new Model(500, "请输入密码");
+        }
+        if (ParaClick.clickString(distributorData.getNickname())) {
+            return new Model(500, "请输入姓名");
+        }
+        if (ParaClick.clickString(distributorData.getQd())) {
+            return new Model(500, "请输入渠道");
+        }
         int index = distributorService.addDistributor(distributorData);
         if (index < 1)
             return new Model(500, "增加失败");
@@ -126,6 +138,37 @@ public class DistributorController {
         return new Model(200, "修改成功");
     }
 
+    @ApiOperation("修改分销商状态为下架状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", dataType = "String", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "userType", value = "cps用戶Id", dataType = "String",required = true, paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "passType", value = "绑定状态", dataType = "String", required = true, paramType = "query"),
+    })
+    @PostMapping(value = ActionUrl.ADMIN_UPDATE_DISTRIBUTOR_STATE)
+    @RequiresPermissions("distributor:updateState")
+    public Model updateDistributorState(@RequestParam("id") String id,
+                                        @RequestParam("password") String password,
+                                        @RequestParam("userType") String userType,
+                                        @RequestParam("passType") Integer passType)
+            throws Exception {
+        if (ParaClick.clickString(id))
+            return new Model(500, "ID为空");
+        if (passType == 1) {
+            if (ParaClick.clickString(userType))
+                return new Model(500, "賬號为空");
+            if (ParaClick.clickString(password))
+                return new Model(500, "密码为空");
+            Admin admin =adminService.checkUser(userType,password);
+            if (admin == null)
+                return new Model(500, "密码错误");
+        }
+        //  修改分销商状态为下架
+        int index = distributorService.updateDistributorState(id);
+        if (index < 1)
+            return new Model(500, "修改失败");
+        return new Model(200, "修改成功");
+    }
 
     /**
      *    根据id查询分销商
@@ -167,6 +210,7 @@ public class DistributorController {
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String", required = true, paramType = "query"),
     })
     @PostMapping(value = ActionUrl.BINDING_CPS_DISTRIBUTOR)
+    @RequiresAuthentication
     @RequiresPermissions("distributor:unbind")
     public Model unbindDistributor(@RequestParam("id") String id,
                                    @RequestParam("password") String password,

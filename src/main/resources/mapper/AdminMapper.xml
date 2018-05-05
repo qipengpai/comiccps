@@ -47,7 +47,7 @@
     uid, username, password, state, salt, is_system, created_at, updated_at
     </sql>
     <sql id="Custom_Column_List">
-        uid, username, state, created_at
+        uid, username, state, is_system,created_at,updated_at
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -68,6 +68,9 @@
       #{createdAt,jdbcType=VARCHAR}, #{updatedAt,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.Admin">
+        <selectKey keyProperty="uid" resultType="String" order="BEFORE">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
         insert into admin
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uid != null">

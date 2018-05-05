@@ -5,6 +5,7 @@ import com.qpp.comiccps.basics.entity.MallCartoonOrder;
 import com.qpp.comiccps.basics.entity.data.MallCartoonOrderData;
 import com.qpp.comiccps.basics.entity.data.MallCartoonOrderTotalData;
 import com.qpp.comiccps.tool.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -39,5 +40,6 @@ public interface MallCartoonOrderMapper {
     //（条件）咔咔豆收益
     Page<MallCartoonOrderTotalData> selectMallCartoonOrderTotal(PageInfo pageInfo);
 
-
+    // 查询咔咔豆总和
+    int getBeanSum(@Param("sentry1") String sentry1, @Param("sentry2") String sentry2);
 }

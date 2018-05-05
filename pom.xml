@@ -224,11 +224,11 @@
                 </execution>
             </executions>
             <configuration>
-               &lt;!&ndash;允许移动生成的文件 &ndash;&gt;
+               &lt;!&ndash;允许移动生成的文件&ndash;&gt;
                 <verbose>true</verbose>
-             &lt;!&ndash;   是否覆盖&ndash;&gt;
+             	&lt;!&ndash;是否覆盖&ndash;&gt;
                 <overwrite>true</overwrite>
-              &lt;!&ndash;  自动生成的配置&ndash;&gt;
+              &lt;!&ndash;自动生成的配置&ndash;&gt;
                 <configurationFile>
                     src/main/resources/config/mybatis-generator.xml</configurationFile>
             </configuration>
