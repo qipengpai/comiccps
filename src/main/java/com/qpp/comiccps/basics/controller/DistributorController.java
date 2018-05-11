@@ -7,9 +7,8 @@ import com.qpp.comiccps.basics.entity.data.DistributorData;
 import com.qpp.comiccps.basics.service.impl.AdminServiceImpl;
 import com.qpp.comiccps.basics.service.impl.DistributorServiceImpl;
 import com.qpp.comiccps.system.ActionUrl;
-import com.qpp.comiccps.tool.Model;
-import com.qpp.comiccps.tool.PageInfo;
-import com.qpp.comiccps.tool.ParaClick;
+import com.qpp.comiccps.tool.*;
+import com.qpp.comiccps.weChat.url.GetUrl;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class DistributorController {
@@ -229,5 +230,37 @@ public class DistributorController {
             return new Model(500, "解除绑定失敗");
         return new Model(200, "解除绑定成功");
     }
+    @ApiOperation("Cps用户修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "password", value = "原密码", dataType = "String", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "newPassword", value = "密码", dataType = "String", required = true, paramType = "query"),
+    })
+    @PostMapping(value = ActionUrl.UPDATE_CPS_ADMINPWD)
+    @RequiresAuthentication
+    public Model unbindDistributor(HttpServletRequest request, @RequestParam("password") String password,
+                                   @RequestParam("newPassword") String newPassword)
+            throws Exception {
+        if (ParaClick.clickString(password))
+            return new Model(500, "原密码为空");
+        if (ParaClick.clickString(newPassword))
+            return new Model(500, "新密码为空");
+        // 根据用户名获取用户Id
+        int index  =adminService.updatePassword(JWTUtil.getUsername(request.getHeader("Authorization").toString()), MD5.getMd5(password),MD5.getMd5(newPassword));
+        if (index<1)
+            return new Model(500, "修改密码失敗");
+        return new Model(200, "修改密码成功");
+    }
 
+    @ApiOperation("生成平台路径")
+    @ApiImplicitParam(name = "qd", value = "渠道", dataType = "String", required = true, paramType = "query")
+    @PostMapping(value = ActionUrl.CREATE_PTURL)
+    @RequiresAuthentication
+    public Model createMainUrl(@RequestParam("qd") String qd)
+            throws Exception {
+        if (ParaClick.clickString(qd))
+            return new Model(500, "渠道为空");
+        // 根据用户名获取用户Id
+        String url=GetUrl.getComicMainUrl(qd);
+        return new Model(200, url);
+    }
 }

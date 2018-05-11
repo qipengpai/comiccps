@@ -42,4 +42,14 @@ public interface AdminMapper {
 
     // 根据用户名获取用户Id
     Admin getAdminByUserName(@Param("authorization")String authorization);
+
+    // 查詢所有可用狀態cps 并且已經關連公衆號
+    List<Admin> getAllCpsAdminState();
+
+    // cps 总数
+    int getCpsCount(@Param("uid") String uid);
+
+    // Cps用户修改密码
+    int updatePassword(@Param("username")String username,
+                       @Param("password")String password,@Param("newPassword") String newPassword);
 }

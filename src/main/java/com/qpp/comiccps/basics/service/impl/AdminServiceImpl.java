@@ -136,4 +136,16 @@ public class AdminServiceImpl {
     public Admin getAdminByUserName(String authorization) {
         return adminMapper.getAdminByUserName(authorization);
     }
+
+    /**
+     *    Cps用户修改密码
+     *
+     * @author pengpai
+     * @date 2018/5/8 18:09
+     * @param authorization, md5, md51
+     * @return int
+     */
+    public int updatePassword(String authorization, String md5, String md51) {
+        return adminMapper.updatePassword(authorization,md5,md51);
+    }
 }

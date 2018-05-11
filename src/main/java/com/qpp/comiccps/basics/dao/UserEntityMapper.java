@@ -3,6 +3,7 @@ package com.qpp.comiccps.basics.dao;
 import com.github.pagehelper.Page;
 import com.qpp.comiccps.basics.entity.UserEntity;
 import com.qpp.comiccps.basics.entity.data.AdminFansData;
+import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
 import com.qpp.comiccps.tool.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,7 @@ public interface UserEntityMapper {
     Page<UserEntity> getAllUserEntityBetter1000(PageInfo pageInfo);
 
     //公众号粉丝分布
-    List<AdminFansData> selectUserDistribution();
+    Page<UserOrderProfitNew> selectUserDistribution(PageInfo pageInfo);
 
     //公众号粉丝性別
     List<AdminFansData> selectUserSex();

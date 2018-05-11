@@ -47,7 +47,14 @@ public class MallCartoonOrderServiceImpl {
     }
 
 
-
+    /**
+     *    查询咔咔豆收益统计
+     *
+     * @author pengpai
+     * @date 2018/5/7 16:35
+     * @param pageInfo
+     * @return com.github.pagehelper.Page<com.qpp.comiccps.basics.entity.data.MallCartoonOrderTotalData>
+     */
     public Page<MallCartoonOrderTotalData> selectMallCartoonOrderTotal(PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
         return mallCartoonOrderMapper.selectMallCartoonOrderTotal(pageInfo);

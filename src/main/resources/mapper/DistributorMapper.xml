@@ -509,4 +509,11 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--cps旗下提現數據总数-->
+  <select id="getDistributorByAdmin" resultMap="BaseResultMap">
+    SELECT IFNULL(SUM(d.allRecharge),0) AS allRecharge,IFNULL(SUM(balance),0) AS balance,
+    IFNULL(SUM(overRecharge),0) AS overRecharge FROM Admin AS a,Distributor AS d
+    WHERE a.uid=d.userType AND a.state = 1 AND d.state = 1 AND a.uid=#{uid}
+  </select>
 </mapper>

@@ -3,7 +3,7 @@ package com.qpp.comiccps.basics.entity.data;
 public class UserOrderProfitNew {
     private String username; //名字
     private String qd; //渠道
-    private Double money;  //钱数
+    private int money;  //钱数
 
 
     public String getUsername() {
@@ -22,11 +22,11 @@ public class UserOrderProfitNew {
         this.qd = qd;
     }
 
-    public Double getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 }

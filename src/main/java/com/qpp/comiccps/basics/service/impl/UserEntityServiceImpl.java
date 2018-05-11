@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.qpp.comiccps.basics.dao.UserEntityMapper;
 import com.qpp.comiccps.basics.entity.UserEntity;
 import com.qpp.comiccps.basics.entity.data.AdminFansData;
+import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
 import com.qpp.comiccps.tool.PageInfo;
 import com.qpp.comiccps.tool.ParaClick;
 import com.qpp.comiccps.tool.StringToInt;
@@ -54,8 +55,9 @@ public class UserEntityServiceImpl {
      * @date 2018/5/3 14:52
      * @return java.util.List<com.qpp.comiccps.basics.entity.data.AdminFansData>
      */
-    public List<AdminFansData> selectUserDistribution() {
-        return userEntityMapper.selectUserDistribution();
+    public Page<UserOrderProfitNew> selectUserDistribution(PageInfo pageInfo) {
+        PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
+        return userEntityMapper.selectUserDistribution(pageInfo);
     }
 
     /**

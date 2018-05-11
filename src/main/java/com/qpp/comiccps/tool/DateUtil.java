@@ -167,6 +167,9 @@ public class DateUtil {
 			pageInfo.setStartDate(DateUtil.getdate_yyyy_MM_dd());
 			pageInfo.setEndDate(DateUtil.getdate_yyyy_MM_dd());
 		}
+		if (ParaClick.clickString(pageInfo.getCondition()) ) {
+			pageInfo.setCondition(null);
+		}
 		return pageInfo;
 	}
 
@@ -183,8 +186,11 @@ public class DateUtil {
 			throw new BusinessException("时间错误");
 		}
 		if (ParaClick.clickString(pageInfo.getStartDate()) && ParaClick.clickString(pageInfo.getEndDate())){
-			pageInfo.setStartDate(DateUtil.getdate_yyyy_MM_dd());
-			pageInfo.setEndDate(DateUtil.getdate_yyyy_MM_dd());
+			pageInfo.setStartDate(DateUtil.getYesterday());
+			pageInfo.setEndDate(DateUtil.getYesterday());
+		}
+		if (ParaClick.clickString(pageInfo.getCondition())){
+			pageInfo.setCondition(null);
 		}
 		return pageInfo;
 	}

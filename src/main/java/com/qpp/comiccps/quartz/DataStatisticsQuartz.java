@@ -39,7 +39,7 @@ public class DataStatisticsQuartz {
      * @date 2018/5/5 12:17
      * @return void
      */
-    @Scheduled(cron = "0 11 1 * * ?")
+    @Scheduled(cron = "0 3 0 * * ?")
     public void dailyDataStatistics() throws Exception {
         if (dailyDataStatisticsService.dailyDataStatistics(1)) {
             System.out.println("------------------------------------------------昨日统计数据成功-----------------------------------------------");
@@ -56,7 +56,8 @@ public class DataStatisticsQuartz {
      * @date 2018/5/5 14:01
      * @return void
      */
-    @Scheduled(cron = "0 */4 * * * ?")
+    //@Scheduled(cron = "0 */4 * * * ?")
+    @Scheduled(cron = "0 0/5 9-20 * * ?")
     public void todayDataStatistics() throws Exception {
         if (dailyDataStatisticsService.dailyDataStatistics(2)) {
             System.out.println("------------------------------------------------当日统计数据成功-----------------------------------------------");

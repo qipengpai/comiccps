@@ -241,9 +241,8 @@
 
     <!--查询所有CPS用户-->
     <select id="getAllCpsAdmin" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Custom_Column_List"/>
-        FROM Admin
+        SELECT a.* FROM Admin AS a,admin_role AS ar,cps_role AS c
+        WHERE a.uid=ar.admin_id AND ar.role_id = c.role_id AND c.role_id='29aafd8ab08c4078bec439c8d9fb7e04'
     </select>
 
     <!--解除绑定前验证密码-->
@@ -268,4 +267,23 @@
         <include refid="Custom_Column_List"/>
         FROM  Admin WHERE username = #{authorization}
     </select>
+
+    <!--查詢所有可用狀態cps 并且已經關連公衆號-->
+    <select id="getAllCpsAdminState" resultMap="CustomResultMap">
+        SELECT DISTINCT a.uid,a.username
+        FROM Admin AS a,Distributor AS d
+        WHERE a.uid=d.userType AND a.state = 1 AND d.state = 1 AND a.is_system='yunying'
+    </select>
+
+    <!--cps 总数-->
+    <select id="getCpsCount" resultType="java.lang.Integer">
+        SELECT count(0) FROM Admin AS a,Distributor AS d
+        WHERE a.uid=d.userType AND a.state = 1 AND d.state = 1 AND a.uid=#{uid}
+    </select>
+    <!--cps修改密码-->
+    <update id="updatePassword">
+      update admin
+        set password = #{newPassword,jdbcType=VARCHAR}
+        where username = #{username} AND password=#{password}
+    </update>
 </mapper>

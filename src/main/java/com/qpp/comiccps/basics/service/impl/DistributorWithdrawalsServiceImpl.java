@@ -6,6 +6,7 @@ import com.qpp.comiccps.basics.dao.DistributorMapper;
 import com.qpp.comiccps.basics.dao.DistributorWithdrawalsMapper;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.DistributorWithdrawals;
+import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
 import com.qpp.comiccps.exception.BusinessException;
 import com.qpp.comiccps.tool.ArithUtil;
 import com.qpp.comiccps.tool.PageInfo;
@@ -77,5 +78,18 @@ public class DistributorWithdrawalsServiceImpl {
      */
     public Double selectSumDistributorWithdrawals(String withdrawalsState, PageInfo pageInfo, String uid) {
         return distributorWithdrawalsMapper.selectSumDistributorWithdrawals(withdrawalsState,pageInfo,uid);
+    }
+
+    /**
+     *    分页条件查询现金收益列表
+     *
+     * @author pengpai
+     * @date 2018/5/7 11:53
+     * @param pageInfo1
+     * @return com.github.pagehelper.Page<com.qpp.comiccps.basics.entity.data.UserOrderProfitNew>
+     */
+    public Page<UserOrderProfitNew> selectOrderProfitNew(PageInfo pageInfo1) {
+        PageHelper.startPage(pageInfo1.getPageNum(),pageInfo1.getPageSize());
+        return distributorWithdrawalsMapper.selectOrderProfitNew(pageInfo1);
     }
 }

@@ -361,9 +361,13 @@
     </select>
 
     <!--公众号粉丝分布-->
-    <select id="selectUserDistribution" resultType="com.qpp.comiccps.basics.entity.data.AdminFansData">
-        SELECT platformIndex AS propertiesName,count(0) AS propertiesValue
-        FROM UserEntity GROUP BY platformIndex ORDER BY propertiesValue DESC
+    <select id="selectUserDistribution" resultType="com.qpp.comiccps.basics.entity.data.UserOrderProfitNew">
+        SELECT d.nickName AS username, platformIndex AS qd,count(0) AS money
+        FROM UserEntity AS u,distributor AS d WHERE u.platformIndex=d.qd
+        <if test="condition != null">
+            AND LOCATE(#{condition}, d.nickName)
+        </if>
+        GROUP BY platformIndex ORDER BY money DESC
     </select>
 
     <!--公众号粉丝性別-->

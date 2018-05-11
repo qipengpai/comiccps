@@ -223,7 +223,7 @@
 
   <!--分页条件查询现金收益列表-->
   <select id="selectOrderProfitNew" resultType="com.qpp.comiccps.basics.entity.data.UserOrderProfitNew">
-    SELECT d.userName AS username,o.orderIntegral AS qd,SUM(o.orderMoney) as money
+    SELECT d.userName AS username,o.orderIntegral AS qd,IFNUMM(SUM(o.orderMoney),0) as money
     FROM UserEntity AS u,UserOrder AS o,Distributor AS d WHERE u.userId=o.orderUserId
     AND d.qd=u.orderIntegral AND o.orderState=1
     AND o.orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
@@ -232,8 +232,8 @@
 
   <!--查询现金收益-->
   <select id="selectOrderProfitNewSum" resultType="java.lang.Double">
-    SELECT SUM(orderMoney) FROM UserOrder WHERE orderState=1
-    AND o.orderDate>='2018-02-24 14:08:30'  AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+    SELECT IFNULL(SUM(orderMoney),0) FROM UserOrder WHERE orderState=1
+    AND orderDate>='2018-02-24 14:08:30'  AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
   </select>
 
   <!--每日定时清除无效订单  AND orderDate &lt; '2018-04-22 00:00:00'-->

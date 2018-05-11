@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qpp.comiccps.basics.dao.DistributorWithdrawalsMapper">
-  <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="distridutionId" jdbcType="VARCHAR" property="distridutionid" />
-    <result column="impldate" jdbcType="VARCHAR" property="impldate" />
-    <result column="proportion" jdbcType="DOUBLE" property="proportion" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="withdrawalsDate" jdbcType="VARCHAR" property="withdrawalsdate" />
-    <result column="withdrawalsMoney" jdbcType="DOUBLE" property="withdrawalsmoney" />
-    <result column="withdrawalsState" jdbcType="INTEGER" property="withdrawalsstate" />
-    <result column="orderSum" jdbcType="INTEGER" property="ordersum" />
-    <result column="todayRecharge" jdbcType="DOUBLE" property="todayrecharge" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="distridutionId" jdbcType="VARCHAR" property="distridutionid"/>
+        <result column="impldate" jdbcType="VARCHAR" property="impldate"/>
+        <result column="proportion" jdbcType="DOUBLE" property="proportion"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="withdrawalsDate" jdbcType="VARCHAR" property="withdrawalsdate"/>
+        <result column="withdrawalsMoney" jdbcType="DOUBLE" property="withdrawalsmoney"/>
+        <result column="withdrawalsState" jdbcType="INTEGER" property="withdrawalsstate"/>
+        <result column="orderSum" jdbcType="INTEGER" property="ordersum"/>
+        <result column="todayRecharge" jdbcType="DOUBLE" property="todayrecharge"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, distridutionId, impldate, proportion, remarks, withdrawalsDate, withdrawalsMoney, 
     withdrawalsState, orderSum, todayRecharge
   </sql>
-  <sql id="Custom_Column_List">
+    <sql id="Custom_Column_List">
     id, distridutionId,  proportion, remarks, withdrawalsDate, withdrawalsMoney,
     withdrawalsState, orderSum, todayRecharge
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from distributorwithdrawals
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from distributorwithdrawals
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from distributorwithdrawals
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    <insert id="insert" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
     insert into distributorwithdrawals (id, distridutionId, impldate, 
       proportion, remarks, withdrawalsDate, 
       withdrawalsMoney, withdrawalsState, orderSum, 
@@ -41,107 +41,107 @@
       #{withdrawalsmoney,jdbcType=DOUBLE}, #{withdrawalsstate,jdbcType=INTEGER}, #{ordersum,jdbcType=INTEGER}, 
       #{todayrecharge,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
-    insert into distributorwithdrawals
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="distridutionid != null">
-        distridutionId,
-      </if>
-      <if test="impldate != null">
-        impldate,
-      </if>
-      <if test="proportion != null">
-        proportion,
-      </if>
-      <if test="remarks != null">
-        remarks,
-      </if>
-      <if test="withdrawalsdate != null">
-        withdrawalsDate,
-      </if>
-      <if test="withdrawalsmoney != null">
-        withdrawalsMoney,
-      </if>
-      <if test="withdrawalsstate != null">
-        withdrawalsState,
-      </if>
-      <if test="ordersum != null">
-        orderSum,
-      </if>
-      <if test="todayrecharge != null">
-        todayRecharge,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="distridutionid != null">
-        #{distridutionid,jdbcType=VARCHAR},
-      </if>
-      <if test="impldate != null">
-        #{impldate,jdbcType=VARCHAR},
-      </if>
-      <if test="proportion != null">
-        #{proportion,jdbcType=DOUBLE},
-      </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="withdrawalsdate != null">
-        #{withdrawalsdate,jdbcType=VARCHAR},
-      </if>
-      <if test="withdrawalsmoney != null">
-        #{withdrawalsmoney,jdbcType=DOUBLE},
-      </if>
-      <if test="withdrawalsstate != null">
-        #{withdrawalsstate,jdbcType=INTEGER},
-      </if>
-      <if test="ordersum != null">
-        #{ordersum,jdbcType=INTEGER},
-      </if>
-      <if test="todayrecharge != null">
-        #{todayrecharge,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
-    update distributorwithdrawals
-    <set>
-      <if test="distridutionid != null">
-        distridutionId = #{distridutionid,jdbcType=VARCHAR},
-      </if>
-      <if test="impldate != null">
-        impldate = #{impldate,jdbcType=VARCHAR},
-      </if>
-      <if test="proportion != null">
-        proportion = #{proportion,jdbcType=DOUBLE},
-      </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="withdrawalsdate != null">
-        withdrawalsDate = #{withdrawalsdate,jdbcType=VARCHAR},
-      </if>
-      <if test="withdrawalsmoney != null">
-        withdrawalsMoney = #{withdrawalsmoney,jdbcType=DOUBLE},
-      </if>
-      <if test="withdrawalsstate != null">
-        withdrawalsState = #{withdrawalsstate,jdbcType=INTEGER},
-      </if>
-      <if test="ordersum != null">
-        orderSum = #{ordersum,jdbcType=INTEGER},
-      </if>
-      <if test="todayrecharge != null">
-        todayRecharge = #{todayrecharge,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+    <insert id="insertSelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+        insert into distributorwithdrawals
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="distridutionid != null">
+                distridutionId,
+            </if>
+            <if test="impldate != null">
+                impldate,
+            </if>
+            <if test="proportion != null">
+                proportion,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="withdrawalsdate != null">
+                withdrawalsDate,
+            </if>
+            <if test="withdrawalsmoney != null">
+                withdrawalsMoney,
+            </if>
+            <if test="withdrawalsstate != null">
+                withdrawalsState,
+            </if>
+            <if test="ordersum != null">
+                orderSum,
+            </if>
+            <if test="todayrecharge != null">
+                todayRecharge,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="distridutionid != null">
+                #{distridutionid,jdbcType=VARCHAR},
+            </if>
+            <if test="impldate != null">
+                #{impldate,jdbcType=VARCHAR},
+            </if>
+            <if test="proportion != null">
+                #{proportion,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawalsdate != null">
+                #{withdrawalsdate,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawalsmoney != null">
+                #{withdrawalsmoney,jdbcType=DOUBLE},
+            </if>
+            <if test="withdrawalsstate != null">
+                #{withdrawalsstate,jdbcType=INTEGER},
+            </if>
+            <if test="ordersum != null">
+                #{ordersum,jdbcType=INTEGER},
+            </if>
+            <if test="todayrecharge != null">
+                #{todayrecharge,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
+        update distributorwithdrawals
+        <set>
+            <if test="distridutionid != null">
+                distridutionId = #{distridutionid,jdbcType=VARCHAR},
+            </if>
+            <if test="impldate != null">
+                impldate = #{impldate,jdbcType=VARCHAR},
+            </if>
+            <if test="proportion != null">
+                proportion = #{proportion,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawalsdate != null">
+                withdrawalsDate = #{withdrawalsdate,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawalsmoney != null">
+                withdrawalsMoney = #{withdrawalsmoney,jdbcType=DOUBLE},
+            </if>
+            <if test="withdrawalsstate != null">
+                withdrawalsState = #{withdrawalsstate,jdbcType=INTEGER},
+            </if>
+            <if test="ordersum != null">
+                orderSum = #{ordersum,jdbcType=INTEGER},
+            </if>
+            <if test="todayrecharge != null">
+                todayRecharge = #{todayrecharge,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qpp.comiccps.basics.entity.DistributorWithdrawals">
     update distributorwithdrawals
     set distridutionId = #{distridutionid,jdbcType=VARCHAR},
       impldate = #{impldate,jdbcType=VARCHAR},
@@ -155,49 +155,88 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <!--（条件）分页查看分销商结算单-->
-  <select id="selectDistributorWithdrawals" resultMap="BaseResultMap">
-    SELECT dw.* FROM DistributorWithdrawals AS dw,Distributor AS d
-    WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
-    <if test="uid != 'ad313d38fe9447ce863fe8584743a010'">
-      AND d.userType=#{uid,jdbcType=VARCHAR}
-    </if>
-    <if test="withdrawalsState != null">
-      AND dw.withdrawalsState= #{withdrawalsState}
-    </if>
-    <if test="condition != null">
-      AND ( LOCATE(#{condition},dw.distridutionId)>0
-      OR LOCATE(#{condition},dw.remarks)>0 )
-    </if>
-    <if test="startDate != null">
-      AND dw.withdrawalsDate  BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
-    </if>
-    ORDER BY dw.impldate DESC
-  </select>
+    <!--（条件）分页查看分销商结算单-->
+    <select id="selectDistributorWithdrawals" resultMap="BaseResultMap">
+        SELECT dw.* FROM DistributorWithdrawals AS dw,Distributor AS d
+        WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
+        <if test="uid != 'ad313d38fe9447ce863fe8584743a010'">
+            AND d.userType=#{uid,jdbcType=VARCHAR}
+        </if>
+        <if test="withdrawalsState != null">
+            AND dw.withdrawalsState= #{withdrawalsState}
+        </if>
+        <if test="condition != null">
+            AND ( LOCATE(#{condition},dw.distridutionId)>0
+            OR LOCATE(#{condition},dw.remarks)>0 )
+        </if>
+        <if test="startDate != null">
+            AND dw.withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+        ORDER BY dw.impldate DESC
+    </select>
 
-  <!--打款后完成订单-->
-  <update id="finishDistributorWithdrawals">
+    <!--打款后完成订单-->
+    <update id="finishDistributorWithdrawals">
     UPDATE distributorwithdrawals
     SET withdrawalsState = 1
     WHERE id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <!--结算单求和-->
-  <select id="selectSumDistributorWithdrawals" resultType="java.lang.Double">
-   SELECT SUM(dw.orderMoney) FROM  DistributorWithdrawals
-    DistributorWithdrawals AS dw,Distributor AS d
-    WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
-    <if test="uid != 'ad313d38fe9447ce863fe8584743a010' or uid != '1e67f167d99c43f897ec6566043ad6ec'">
-      AND d.userType=#{uid,jdbcType=VARCHAR}
-    </if>
-    <if test="withdrawalsState != null">
-      AND dw.withdrawalsState= #{withdrawalsstate}
-    </if>
-    <if test="condition != null">
-      AND (INSTR (#{condition},dw.distridutionId) OR (INSTR (#{condition},dw.remarks))
-    </if>
-    <if test="startDate != null">
-      AND dw.withdrawalsDate  BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
-    </if>
+    <!--结算单求和-->
+    <select id="selectSumDistributorWithdrawals" resultType="java.lang.Double">
+        SELECT SUM(dw.orderMoney) FROM DistributorWithdrawals AS dw,Distributor AS d
+        WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
+        <if test="uid != 'ad313d38fe9447ce863fe8584743a010' or uid != '1e67f167d99c43f897ec6566043ad6ec'">
+            AND d.userType=#{uid,jdbcType=VARCHAR}
+        </if>
+        <if test="withdrawalsState != null">
+            AND dw.withdrawalsState= #{withdrawalsstate}
+        </if>
+        <if test="condition != null">
+            AND (INSTR (#{condition},dw.distridutionId) OR (INSTR (#{condition},dw.remarks))
+        </if>
+        <if test="startDate != null">
+            AND dw.withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+    </select>
+
+    <!--分页条件查询现金收益列表-->
+    <select id="selectOrderProfitNew" resultType="com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics">
+        SELECT d.nickname AS username,d.proportion AS proportion,SUM(dw.withdrawalsMoney) AS money
+        FROM DistributorWithdrawals AS dw,Distributor AS d
+        WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
+        <if test="condition != null">
+            AND LOCATE(#{condition}, d.nickName)
+        </if>
+        <if test="startDate != null">
+            AND withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+        GROUP BY dw.distridutionId ORDER BY money DESC
+    </select>
+    <!--分页条件查询现金收益列表-->
+    <select id="selectOrderProfitNew2" resultType="com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics">
+        SELECT d.nickname AS username,d.proportion AS proportion,SUM(dw.withdrawalsMoney) AS money
+        FROM DistributorWithdrawals AS dw,Distributor AS d
+        WHERE dw.distridutionId=d.id AND dw.withdrawalsMoney>0
+        <if test="startDate != null">
+            AND withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+        GROUP BY dw.distridutionId ORDER BY money DESC
+    </select>
+    <!-- cps昨日流水-->
+    <select id="yestodayCpsDataStatistics" resultType="com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics">
+    SELECT IFNULL(SUM(dw.todayRecharge),0) AS proportion,IFNULL(SUM(dw.withdrawalsMoney),0) AS money
+    FROM distributorwithdrawals AS dw,distributor AS d,admin AS a
+    WHERE dw.distridutionId= d.id AND d.userType = a.uid AND a.uid = #{uid}
+    AND dw.withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{startDate},INTERVAL 1 DAY)
+  </select>
+
+    <!-- 本月流水與收益-->
+    <select id="cpsMonthDataStatistics" resultType="com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics">
+    SELECT IFNULL(SUM(monthRunWater),0) AS proportion,IFNULL(SUM(monthProfit),0) AS money
+    FROM  AdminCpsStatisticsDay WHERE uid = #{uid}
+    AND DATE_FORMAT(implDate,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+    UNION ALL SELECT IFNULL(SUM(monthRunWater),0) AS proportion,IFNULL(SUM(monthProfit),0) AS money
+    FROM  AdminCpsStatisticsDay WHERE uid = #{uid}
   </select>
 </mapper>

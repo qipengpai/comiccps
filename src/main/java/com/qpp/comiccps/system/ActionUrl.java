@@ -8,6 +8,10 @@ public class ActionUrl {
     public static final String CPS_CREATE_ADMIN="/crxl/qpp/comicCps/createCpsAdmin";
     // 查询所有Cps用户
     public static final String GET_ALL_CPS_ADMIN="/crxl/qpp/comicCps/getAllCpsAdmin";
+    // Cps用户修改密码
+    public static final String UPDATE_CPS_ADMINPWD="/crxl/qpp/comicCps/updateAdminPwd";
+    // 生成平台连接
+    public static final String CREATE_PTURL="/crxl/qpp/comicCps/createPtUrl";
 
 
 
@@ -58,5 +62,10 @@ public class ActionUrl {
     public static final String SELECT_DATA_STATISTICS_EVERYDAY = "/crxl/qpp/comicCps/select/dataStatisticsEveryDay";
     // 后台查看数据趋势统计
     public static final String SELECT_DATA_TRENDMAP = "/crxl/qpp/comicCps/select/dataTrendMap";
-
+    // 后台查看cps每日统计数据
+    public static final String SELECT_CPSDATA_STATISTICS = "/crxl/qpp/comicCps/select/cpsDataStatistics";
+    // 后台查看cps总统计数据
+    public static final String SELECT_CPSTOTALDATA_STATISTICS = "/crxl/qpp/comicCps/select/cpsTotalDataStatistics";
+    // 后台生成EXCEL
+    public static final String EXPORT_EXCEL="/crxl/qpp/comicCps/exportExcel";
 }

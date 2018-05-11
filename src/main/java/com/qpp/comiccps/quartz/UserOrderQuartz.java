@@ -13,13 +13,13 @@ public class UserOrderQuartz {
     @Autowired
     private UserOrderServiceImpl userOrderService;
 
-    @Scheduled(cron = "0 15 5 * * ?")
-    public void distributorTotalYmd() throws Exception {
-        if (userOrderService.deleteInvalidOrder()) {
-            System.out.println("------------------------------------------------清除无效订单成功-----------------------------------------------");
-        } else {
-            System.out.println("------------------------------------------------清除无效订单失败-----------------------------------------------");
-        }
-        System.out.println("执行调度任务：" + new Date());
-    }
+//    @Scheduled(cron = "0 15 5 * * ?")
+//    public void distributorTotalYmd() throws Exception {
+//        if (userOrderService.deleteInvalidOrder()) {
+//            System.out.println("------------------------------------------------清除无效订单成功-----------------------------------------------");
+//        } else {
+//            System.out.println("------------------------------------------------清除无效订单失败-----------------------------------------------");
+//        }
+//        System.out.println("执行调度任务：" + new Date());
+//    }
 }

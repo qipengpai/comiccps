@@ -110,7 +110,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     private void response401(ServletRequest req, ServletResponse resp) {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
-            httpServletResponse.sendRedirect("/401");
+            httpServletResponse.sendRedirect("/comiccps/401");
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
@@ -129,7 +129,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
        // LOGGER.info("----------权限控制-------------");
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-            httpServletResponse.sendRedirect("/403");
+            httpServletResponse.sendRedirect("/comiccps/403");
         } catch (IOException e) {
             e.printStackTrace();
         }

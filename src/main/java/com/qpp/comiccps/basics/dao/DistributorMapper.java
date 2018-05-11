@@ -41,4 +41,7 @@ public interface DistributorMapper {
 
     //修改分销商状态为下架
     int updateDistributorState(@Param("id") String id, @Param("state") int state);
+
+    //cps旗下提現數據总数
+    Distributor getDistributorByAdmin(@Param("uid")String uid);
 }

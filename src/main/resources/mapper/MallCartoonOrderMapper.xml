@@ -178,19 +178,28 @@
 
     <!--查询咔咔豆总和-->
     <select id="selectSumMallCartoonOrder" resultType="java.lang.Double">
-        SELECT SUM(orderMoney) FROM MallCartoonOrder
-        WHERE orderState=1
+        SELECT IFNULL(SUM(orderMoney),0) FROM  MallCartoonOrder o
+        LEFT JOIN Cartoon c ON c.id=o.cartoonId  WHERE orderState=1
         <if test="condition != null">
-            AND INSTR(o.userId, #{condition} )>0
+            AND INSTR(c.cartoonName, #{condition} )>0
         </if>
         <if test="startDate">
-            AND dw.withdrawalsDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
+            AND orderDate BETWEEN #{startDate} AND DATE_ADD(#{endDate},INTERVAL 1 DAY)
         </if>
     </select>
 
     <!--（条件）咔咔豆收益-->
     <select id="selectMallCartoonOrderTotal" resultType="com.qpp.comiccps.basics.entity.data.MallCartoonOrderTotalData">
-        SELECT * FROM  MallCartoonOrder
+        SELECT c.cartoonName,SUM(o.orderMoney) AS totalSum FROM MallCartoonOrder o
+        LEFT JOIN Cartoon c ON c.id=o.cartoonId
+        WHERE 1=1
+        <if test="condition != null">
+            AND INSTR(c.cartoonName, #{condition} )>0
+        </if>
+        <if test="startDate != null">
+            AND  o.orderDate BETWEEN #{startDate} and DATE_ADD(#{endDate},INTERVAL 1 DAY)
+        </if>
+        GROUP BY o.cartoonId ORDER BY totalSum DESC
     </select>
 
     <!--查询咔咔豆总和-->

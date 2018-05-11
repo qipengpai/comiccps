@@ -199,7 +199,11 @@
 
     <!--后台查看歷史每日统计数据-->
     <select id="selectDataStatisticsEveryDay" resultMap="BaseResultMap">
-    SELECT * FROM DailyDataStatistics ORDER BY implDate DESC
+    SELECT * FROM DailyDataStatistics WHERE 1=1
+    <if test="startDate != null">
+       AND implDate = #{startDate}
+    </if>
+    ORDER BY implDate DESC
     </select>
 
     <!--判斷今天是否生成-->
@@ -212,7 +216,7 @@
       SELECT DISTINCT c.datelist AS propertiesName,IF(d.dailyvisteraddnum IS NULL , 0, d.dailyvisteraddnum)
         AS propertiesValue FROM DailyDataStatistics AS d
         RIGHT JOIN Calendar as c ON d.implDate = c.datelist
-        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist
     </select>
 
     <!--(豆收入)数据趋势统计-->
@@ -220,7 +224,7 @@
       SELECT DISTINCT c.datelist AS propertiesName,IF(d.beanIncome IS NULL , 0, d.beanIncome)
         AS propertiesValue FROM DailyDataStatistics AS d
         RIGHT JOIN Calendar as c ON d.implDate = c.datelist
-        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist
     </select>
 
     <!--(日訪問量)数据趋势统计-->
@@ -228,6 +232,6 @@
       SELECT DISTINCT c.datelist AS propertiesName,IF(d.dailyvisternum IS NULL , 0, d.dailyvisternum)
         AS propertiesValue FROM DailyDataStatistics AS d
         RIGHT JOIN Calendar as c ON d.implDate = c.datelist
-        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist DESC
+        WHERE c.datelist BETWEEN #{startDate} AND #{endDate} ORDER BY c.datelist
     </select>
 </mapper>

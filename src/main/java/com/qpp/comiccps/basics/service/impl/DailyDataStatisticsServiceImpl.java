@@ -10,6 +10,7 @@ import com.qpp.comiccps.basics.entity.DailyDataStatistics;
 import com.qpp.comiccps.basics.entity.data.AdminFansData;
 import com.qpp.comiccps.tool.DateUtil;
 import com.qpp.comiccps.tool.PageInfo;
+import com.qpp.comiccps.tool.Uuid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,11 +66,10 @@ public class DailyDataStatisticsServiceImpl {
             dailyDataStatistics.setBeanincome(dailyBeanSum);
             dailyDataStatistics.setDailyvisteraddnum(dailyPaySum);
             dailyDataStatistics.setDailyvisternum(dailyVisterNum);
-            dailyDataStatistics.setImpldate(DateUtil.getYesterday());
             dailyDataStatistics.setPaynum(dailyPayNum);
             dailyDataStatistics.setPaypersonnum(dailyPayPersonNum);
             dailyDataStatistics.setState(1);
-            dailyDataStatistics.setVipuseraddnum(dailyVipUserAddNum);
+            dailyDataStatistics.setVipuseraddnum(dailyVipUserAddNum-dailySvipUserAddNum);
             dailyDataStatistics.setSvipuseraddnum(dailySvipUserAddNum);
             if (dailyPaySum > 0) {
                 dailyDataStatistics.setArppu(Double.parseDouble(dailyPaySum + "") / Double.parseDouble(dailyPayPersonNum + ""));
@@ -87,7 +87,8 @@ public class DailyDataStatisticsServiceImpl {
                 // 判斷今天是否生成
                 DailyDataStatistics dailyDataStatistics1 = dailyDataStatisticsMapper.getAllIfExists(DateUtil.getYesterday());
                 dailyDataStatistics.setId(dailyDataStatistics1.getId());
-                int index = dailyDataStatisticsMapper.updateByPrimaryKey(dailyDataStatistics);
+                dailyDataStatistics.setImpldate(DateUtil.getYesterday());
+                int index = dailyDataStatisticsMapper.updateByPrimaryKeySelective(dailyDataStatistics);
                 if (index < 1)
                     return flag;
                 flag = true;
@@ -96,10 +97,12 @@ public class DailyDataStatisticsServiceImpl {
                 DailyDataStatistics dailyDataStatistics1 = dailyDataStatisticsMapper.getAllIfExists(DateUtil.getdate_yyyy_MM_dd());
                 int index = 0;
                 if (dailyDataStatistics1 == null) {
+                    dailyDataStatistics.setImpldate(DateUtil.getdate_yyyy_MM_dd());
+                    dailyDataStatistics.setUuid(Uuid.getUUID());
                     index = dailyDataStatisticsMapper.insertSelective(dailyDataStatistics);
                 } else {
                     dailyDataStatistics.setId(dailyDataStatistics1.getId());
-                    index = dailyDataStatisticsMapper.updateByPrimaryKey(dailyDataStatistics);
+                    index = dailyDataStatisticsMapper.updateByPrimaryKeySelective(dailyDataStatistics);
                 }
                 if (index < 1) {
                     return flag;
