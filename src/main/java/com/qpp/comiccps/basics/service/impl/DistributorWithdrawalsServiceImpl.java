@@ -7,6 +7,7 @@ import com.qpp.comiccps.basics.dao.DistributorWithdrawalsMapper;
 import com.qpp.comiccps.basics.entity.Distributor;
 import com.qpp.comiccps.basics.entity.DistributorWithdrawals;
 import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
+import com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics;
 import com.qpp.comiccps.exception.BusinessException;
 import com.qpp.comiccps.tool.ArithUtil;
 import com.qpp.comiccps.tool.PageInfo;
@@ -88,7 +89,7 @@ public class DistributorWithdrawalsServiceImpl {
      * @param pageInfo1
      * @return com.github.pagehelper.Page<com.qpp.comiccps.basics.entity.data.UserOrderProfitNew>
      */
-    public Page<UserOrderProfitNew> selectOrderProfitNew(PageInfo pageInfo1) {
+    public Page<WithdrawalsStatistics> selectOrderProfitNew(PageInfo pageInfo1) {
         PageHelper.startPage(pageInfo1.getPageNum(),pageInfo1.getPageSize());
         return distributorWithdrawalsMapper.selectOrderProfitNew(pageInfo1);
     }

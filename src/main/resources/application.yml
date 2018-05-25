@@ -25,7 +25,7 @@ spring:
     datasource:
         name: era
       #  url: jdbc:mysql://192.168.1.10:3307/comic20180224?useSSL=true&useUnicode=true&characterEncoding=utf8
-        url: jdbc:mysql://rm-m5ed294dr2x5760t8do.mysql.rds.aliyuncs.com:3306/comicTest?useSSL=true&useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://rm-m5ed294dr2x5760t8.mysql.rds.aliyuncs.com:3306/comic?useSSL=true&useUnicode=true&characterEncoding=utf8
         username: pengpai
         password: ASDasd19981018
         # 使用druid数据源

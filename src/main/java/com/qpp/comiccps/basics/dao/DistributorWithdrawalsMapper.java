@@ -40,7 +40,7 @@ public interface DistributorWithdrawalsMapper {
                                            @Param("uid") String uid);
 
     // 分页条件查询现金收益列表
-    Page<UserOrderProfitNew> selectOrderProfitNew(PageInfo pageInfo1);
+    Page<WithdrawalsStatistics> selectOrderProfitNew(PageInfo pageInfo1);
 
     // cps昨日流水
     WithdrawalsStatistics yestodayCpsDataStatistics(@Param("uid") String uid, @Param("startDate") String startDate);

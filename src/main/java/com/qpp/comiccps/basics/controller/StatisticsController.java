@@ -10,6 +10,7 @@ import com.qpp.comiccps.basics.entity.DataStatistics;
 import com.qpp.comiccps.basics.entity.data.AdminFansData;
 import com.qpp.comiccps.basics.entity.data.TabulationData;
 import com.qpp.comiccps.basics.entity.data.UserOrderProfitNew;
+import com.qpp.comiccps.basics.entity.data.WithdrawalsStatistics;
 import com.qpp.comiccps.basics.service.impl.*;
 import com.qpp.comiccps.system.ActionUrl;
 import com.qpp.comiccps.tool.*;
@@ -138,12 +139,15 @@ public class StatisticsController {
             return new Model(500, "时间有误");
         }
         //  分页条件查询现金收益列表
-        Page<UserOrderProfitNew> list = distributorWithdrawalsService.selectOrderProfitNew(pageInfo1);
+        Page<WithdrawalsStatistics> list = distributorWithdrawalsService.selectOrderProfitNew(pageInfo1);
         if (!ParaClick.clickList(list))
             return new Model(500, "查询失败");
+        for (WithdrawalsStatistics withdrawalsStatistics:list) {
+            withdrawalsStatistics.setMoney(ArithUtil.interceptDouble(withdrawalsStatistics.getMoney(),2));
+        }
         // 查询现金收益
         Double sum = userOrderService.selectOrderProfitNewSum(pageInfo);
-        PageInfo<UserOrderProfitNew> pageInfos = new PageInfo<>(list);
+        PageInfo<WithdrawalsStatistics> pageInfos = new PageInfo<>(list);
         return new Model(pageInfos,sum);
     }
 
@@ -326,6 +330,14 @@ public class StatisticsController {
         return new Model(adminCpsStatisticsList);
     }
 
+    /**
+     *   导出excel
+     *
+     * @author pengpai
+     * @date 2018/5/14 10:24
+     * @param response, request, startDate, endDate
+     * @return com.qpp.comiccps.tool.Model
+     */
     @ApiOperation("导出excel")
     @GetMapping(value = ActionUrl.EXPORT_EXCEL)
     @ApiImplicitParams({
