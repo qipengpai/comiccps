@@ -68,17 +68,38 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL HTTP/1.1 Connector on port 8080
     -->
-	<Connector port="80" protocol="HTTP/1.1"
-			   maxHttpHeaderSize="8192"
-               maxThreads="1000"
-			   minSpareThreads="100"
-			   maxSpareThreads="300"
-			   acceptCount="1000"
-			   connectionTimeout="20000"
-			   redirectPort="8443" 	
-			   disableUploadTimeout="true"			   
-			   URIEncoding="UTF-8"
-			   />
+      <Connector port="80" protocol="HTTP/1.1"
+                 maxHttpHeaderSize="8192"
+                 maxThreads="2000"
+                 minProcessors="200"
+                 maxProcessors="2000"
+                 minSpareThreads="200"
+                 maxSpareThreads="2000"
+                 acceptCount="2000"
+                 connectionTimeout="20000"
+                 redirectPort="8443"
+                 disableUploadTimeout="true"
+                 URIEncoding="UTF-8"
+      />
+
+     <!-- minProcessors：最小空闲连接线程数，用于提高系统处理性能，默认值为 10
+      maxProcessors：最大连接线程数，即：并发处理的最大请求数，默认值为 75
+      acceptCount：允许的最大连接数，应大于等于 maxProcessors ，默认值为 100
+      enableLookups：是否反查域名，取值为： true 或 false 。为了提高处理能力，应设置为 false
+      connectionTimeout：网络连接超时，单位：毫秒。设置为 0 表示永不超时，这样设置有隐患的。通常可设置为 30000 毫秒。
+      其中和最大连接数相关的参数为maxProcessors 和 acceptCount 。如果要加大并发连接数，应同时加大这两个参数。
+      web server允许的最大连接数还受制于操作系统的内核参数设置，通常 Windows 是 2000 个左右， Linux 是 1000 个左右。
+
+      maxThreads  客户请求最大线程数
+      minSpareThreads    Tomcat初始化时创建的 socket 线程数
+      maxSpareThreads   Tomcat连接器的最大空闲 socket 线程数
+      enableLookups      若设为true, 则支持域名解析，可把 ip 地址解析为主机名
+      redirectPort        在需要基于安全通道的场合，把客户请求转发到基于SSL 的 redirectPort 端口
+      acceptAccount       监听端口队列最大数，满了之后客户请求会被拒绝（不能小于maxSpareThreads  ）
+      connectionTimeout   连接超时
+      minProcessors         服务器创建时的最小处理线程数
+      maxProcessors        服务器同时最大处理线程数
+      URIEncoding    URL统一编码-->
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
